@@ -1,16 +1,53 @@
-import * as React from "react";
-import { View, Text } from "react-native";
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+import React from 'react';
+import 'react-native-gesture-handler';
 
-export default function App() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import LoginScreen from "./src/screens/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
+
+
+
+const Tab = createBottomTabNavigator ();
+const Stack = createStackNavigator();
+
+function Register() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Universal React with Expo</Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="RegisterUser" 
+        component={RegisterScreen} 
+        options={{headerTitle: "Register user"}}/>
+    </Stack.Navigator>
   );
 }
+
+
+const App=()=> {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator 
+        initialRouteName="Login">
+        <Tab.Screen
+            name="Login"
+            component={LoginScreen}
+          />
+        <Stack.Screen 
+          name="RegisterUser" 
+          component={RegisterScreen} 
+          options={{headerTitle: "Register user"}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
