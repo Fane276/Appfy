@@ -1,4 +1,8 @@
 {
   "name": "Appfy",
-  "displayName": "Appfy"
+  "displayName": "Appfy",
+  "expo": {
+    "name": "My app",
+    "slug": "my-app"
+  }
 }
