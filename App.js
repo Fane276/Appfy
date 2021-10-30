@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-import React from 'react';
+import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -33,22 +33,54 @@ function Register() {
 
 
 const App = () => {
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
+
   return (
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     initialRouteName="Login">
+    //     <Tab.Screen
+    //       name="Login"
+    //       component={LoginScreen}
+    //     />
+    //     <Stack.Screen
+    //       name="RegisterUser"
+    //       component={RegisterScreen}
+    //       options={{ headerTitle: "Register user" }} />
+    //     <Stack.Screen
+    //       name="Home"
+    //       component={HomeScreen}
+    //       options={{ headerTitle: "Home Screen" }} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login">
-        <Tab.Screen
-          name="Login"
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name="RegisterUser"
-          component={RegisterScreen}
-          options={{ headerTitle: "Register user" }} />
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerTitle: "Home Screen" }} />
+      <Stack.Navigator>
+        {user ? (
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+          >
+            {/* {props => <HomeScreen {...props} extraData={user} />} */}
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+            >
+              {/* {props => <HomeScreen {...props} extraData={user} />} */}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ headerTitle: "Log In" }} />
+            <Stack.Screen
+              name="Register"
+              component={RegisterScreen}
+              options={{ headerTitle: "Register" }} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

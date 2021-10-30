@@ -3,7 +3,7 @@ import { View, Button, Text, TextInput, StyleSheet, SafeAreaView, Pressable, Ima
 
 import colors from '../assets/colors/colors';
 
-import { auth, firestore } from '../firebase/firebase'
+import { registerUserWithEmailAndPassword } from '../firebase/utils/registerWithEmailAndPassword'
 
 const RegisterScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
@@ -11,35 +11,11 @@ const RegisterScreen = ({ navigation, route }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const onRegisterPress = async () => {
-    if (password !== confirmPassword) {
-      alert("Passwords don't match.")
-      return
+    const userData = await registerUserWithEmailAndPassword(email, password, confirmPassword)
+    if(userData) {
+      navigation.navigate("Home")
+      // navigation.navigate("Home", {user: userData})
     }
-    await auth
-      .createUserWithEmailAndPassword(email, password)
-      .catch((error) => {
-        alert(error)
-      })
-      .then((response) => {
-        const uid = response.user.uid
-        const data = {
-          id: uid,
-          email
-        };
-        const usersRef = firestore.collection('users')
-        usersRef
-          .doc(uid)
-          .set(data)
-          .then(() => {
-            navigation.navigate('Home', { user: data })
-          })
-          .catch((error) => {
-            alert(error)
-          });
-      })
-      .catch((error) => {
-        alert(error)
-      });
   }
 
   return (
@@ -75,7 +51,9 @@ const RegisterScreen = ({ navigation, route }) => {
                 backgroundColor: pressed ? colors.secondary : colors.primary,
               },
               styles.loginButton]}
-            onPress={onRegisterPress}
+            onPress={async () => {
+              await onRegisterPress()
+            }}
           >
             <Text style={styles.loginButtonText}>Register</Text>
           </Pressable>

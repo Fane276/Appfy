@@ -3,7 +3,7 @@ import { Pressable, Text, View, StyleSheet, SafeAreaView, ScrollView } from 'rea
 
 import colors from '../assets/colors/colors';
 
-function LoginScreen({ navigation, route }) {
+const HomeScreen = ({ navigation, route }) => {
     console.log(route);
 
     return (
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginScreen
+export default HomeScreen

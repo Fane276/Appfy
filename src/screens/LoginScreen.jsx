@@ -3,10 +3,21 @@ import { View, Text, TextInput, StyleSheet, SafeAreaView, Pressable } from 'reac
 
 import colors from '../assets/colors/colors';
 
-function LoginScreen({ navigation, route }) {
+import { logInWithEmailAndPassword } from '../firebase/utils/logInWithEmailAndPassword'
+
+const LoginScreen = ({ navigation, route }) => {
   console.log(route);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onLoginPress = async () => {
+    const userData = await logInWithEmailAndPassword(email, password)
+    if (userData) {
+      navigation.navigate("Home")
+      // navigation.navigate("Home", { user })
+    }
+  }
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -30,8 +41,7 @@ function LoginScreen({ navigation, route }) {
           <View style={styles.actionWraper}>
             <Pressable
               onPress={async () => {
-                console.log("GO TO RegisterUser");
-                navigation.navigate('RegisterUser')
+                navigation.navigate('Register')
               }}
             >
               <Text style={styles.textAction}>
@@ -51,7 +61,7 @@ function LoginScreen({ navigation, route }) {
               },
               styles.loginButton]}
             onPress={async () => {
-              navigation.navigate('Home')
+              await onLoginPress()
             }}>
             <Text style={styles.loginButtonText}>Login</Text>
 
