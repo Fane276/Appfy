@@ -40,6 +40,7 @@ const App=()=> {
         <Tab.Screen
             name="Login"
             component={LoginScreen}
+            options={{headerShown: false}}
           />
         <Stack.Screen 
           name="RegisterUser" 
