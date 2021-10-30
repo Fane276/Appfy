@@ -1,9 +1,9 @@
-import React, { useState  } from 'react'
-import {View, Text, TextInput,StyleSheet, SafeAreaView, Pressable } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, TextInput, StyleSheet, SafeAreaView, Pressable } from 'react-native'
 
-import colors  from '../assets/colors/colors';
+import colors from '../assets/colors/colors';
 
-function LoginScreen ({ navigation, route}){
+function LoginScreen({ navigation, route }) {
   console.log(route);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,15 +11,15 @@ function LoginScreen ({ navigation, route}){
     <View style={styles.container}>
       <SafeAreaView>
         <View>
-          
-          <TextInput 
+
+          <TextInput
             style={styles.textInput}
             placeholder="email"
             placeholderTextColor={colors.textDisabled}
             onChangeText={email => setEmail(email)}
             defaultValue={email}
           />
-          <TextInput 
+          <TextInput
             style={styles.textInput}
             placeholder="password"
             placeholderTextColor={colors.textDisabled}
@@ -29,10 +29,11 @@ function LoginScreen ({ navigation, route}){
           />
           <View style={styles.actionWraper}>
             <Pressable
-              onPress={async ()=>{
+              onPress={async () => {
+                console.log("GO TO RegisterUser");
                 navigation.navigate('RegisterUser')
               }}
-              >
+            >
               <Text style={styles.textAction}>
                 Register
               </Text>
@@ -43,26 +44,27 @@ function LoginScreen ({ navigation, route}){
               </Text>
             </Pressable>
           </View>
-          <Pressable  
-            style = {({pressed}) => [
+          <Pressable
+            style={({ pressed }) => [
               {
                 backgroundColor: pressed ? colors.secondary : colors.primary,
               },
               styles.loginButton]}
             onPress={async () => {
+              navigation.navigate('Home')
             }}>
-              <Text style={styles.loginButtonText}>Login</Text>
+            <Text style={styles.loginButtonText}>Login</Text>
 
-            </Pressable>
-          <Text 
+          </Pressable>
+          <Text
             style={styles.centerText}>
             - or -
           </Text>
-          <Pressable 
-            style= {({pressed}) => [
+          <Pressable
+            style={({ pressed }) => [
               {
                 backgroundColor: pressed ? colors.background : colors.textLight,
-              },styles.socialButton]}
+              }, styles.socialButton]}
             onPress={async () => {
             }}
           >
@@ -70,32 +72,32 @@ function LoginScreen ({ navigation, route}){
               Google
             </Text>
           </Pressable>
-          <Pressable 
-            style= {({pressed}) => [
+          <Pressable
+            style={({ pressed }) => [
               {
                 backgroundColor: pressed ? colors.background : colors.textLight,
-              },styles.socialButton]}
+              }, styles.socialButton]}
             onPress={async () => {
-              
+
             }}
           >
-          <Text style={styles.socialButtonText}>
-            Facebook
-          </Text>
+            <Text style={styles.socialButtonText}>
+              Facebook
+            </Text>
 
           </Pressable>
         </View>
       </SafeAreaView>
     </View>
-    
+
   )
 };
 
 const styles = StyleSheet.create({
-  container:{
-    padding:10,
+  container: {
+    padding: 10,
   },
-  textInput:{
+  textInput: {
     height: 40,
     backgroundColor: colors.inputBackground,
     color: colors.textDark,
@@ -105,57 +107,57 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingLeft: 10,
   },
-  loginButton:{
-    height:40,
+  loginButton: {
+    height: 40,
     borderRadius: 20,
     // backgroundColor: colors.primary,
     shadowOpacity: 1,
     shadowRadius: 3,
     marginTop: 10,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  loginButtonText:{
+  loginButtonText: {
     padding: 5,
-    textAlign:'center',
-    fontSize:18,
+    textAlign: 'center',
+    fontSize: 18,
     fontWeight: 'bold',
     color: colors.textLight,
   },
-  socialButton:{
-    height:40,
+  socialButton: {
+    height: 40,
     borderRadius: 20,
     // backgroundColor: colors.primary,
     shadowOpacity: 1,
     shadowRadius: 3,
     marginTop: 10,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderColor: colors.textDisabled,
     borderWidth: 1,
   },
-  socialButtonText:{
+  socialButtonText: {
     padding: 5,
-    textAlign:'center',
-    fontSize:18,
+    textAlign: 'center',
+    fontSize: 18,
     color: colors.textDark,
   },
-  centerText:{
-    height:20,
-    textAlign:'center',
-    alignSelf:'center',
-    fontSize:18,
+  centerText: {
+    height: 20,
+    textAlign: 'center',
+    alignSelf: 'center',
+    fontSize: 18,
     color: colors.textDark,
     marginTop: 20,
     marginBottom: 20,
   },
-  actionWraper:{
-    marginTop:10,
-    flexDirection:'row',
-    alignItems:'center',
+  actionWraper: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
-  textAction:{
+  textAction: {
     color: colors.primary,
   }
 });
