@@ -37,7 +37,7 @@ const FormInput = ({name, placeholder, icon,label,  rules,control, secure, error
     // inputContainerStyle={{borderBottomWidth: 0}}
     secureTextEntry={secure}
     errorStyle={{ color: 'red' }}
-    errorMessage={!isDirty || invalid?errorMessage:""}
+    errorMessage={invalid?errorMessage:""}
   />
   )
 }

@@ -162,8 +162,6 @@ const styles = StyleSheet.create({
     height:60,
     borderRadius: 30,
     backgroundColor: colors.primary,
-    shadowOpacity: 1,
-    shadowRadius: 3,
     marginTop: 10,
     marginHorizontal: 60,
     justifyContent:'center',

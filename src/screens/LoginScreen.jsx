@@ -1,6 +1,6 @@
 
 import React, { useState  } from 'react'
-import {View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import {View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
 import { Image } from 'react-native-elements';
 
 
@@ -19,21 +19,7 @@ import FormInput from '../components/FormInput';
 
 
 
-const getUserData= async ()=>{
-  try{
-      var userJson = await AsyncStorage.getItem(AsyncStorageConsts.userDataJson);
-      return userJson != null ? JSON.parse(userJson) : null; 
-  }
-  catch{
-      // de facut ceva aici
-  }
-}
-
 function LoginScreen ({ navigation, route}){
-  const [userData, setUserData] = useState(null);
-    getUserData().then((data)=>{
-        setUserData(data);
-    })
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues:{
@@ -48,6 +34,9 @@ function LoginScreen ({ navigation, route}){
       // Alert.alert(JSON.stringify(data))
       onLoginPress(data)
     }
+    else{
+      Alert.alert("Please provide valid login informations")
+    }
   };
   const { dirtyFields } = useFormState({
     control
@@ -55,8 +44,9 @@ function LoginScreen ({ navigation, route}){
 
   const onLoginPress = async ({emailAddress, password}) => {
     logInWithEmailAndPassword(emailAddress, password).then((userData)=>{
-      navigation.navigate("Home", { userData: "dorel" })
+      Alert(JSON.stringify(userData));
       if (userData) {
+        navigation.navigate("Home")
         // navigation.navigate("Home")
       }
     })
@@ -177,8 +167,6 @@ const styles = StyleSheet.create({
     height:60,
     borderRadius: 30,
     backgroundColor: colors.primary,
-    shadowOpacity: 1,
-    shadowRadius: 3,
     marginTop: 10,
     marginHorizontal: 60,
     justifyContent:'center',

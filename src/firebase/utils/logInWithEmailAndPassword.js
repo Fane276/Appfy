@@ -11,8 +11,8 @@ const logInWithEmailAndPassword = async (email, password) => {
         return await getUser(signInResponse)
     }
     catch (error) {
-        // alert(error)
-        console.log(error)
+        alert(error)
+        // console.log(error)
     }
 }
 
