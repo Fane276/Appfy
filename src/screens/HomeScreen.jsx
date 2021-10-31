@@ -4,13 +4,12 @@ import { Pressable, Text, View, StyleSheet, SafeAreaView, ScrollView } from 'rea
 import colors from '../assets/colors/colors';
 
 const HomeScreen = ({ navigation, route }) => {
-    console.log(route);
-
+    // const { userData } = route.params;
     return (
         <ScrollView>
             <SafeAreaView>
                 <View style={styles.container}>
-                    <Text>Home Screen</Text>
+                    <Text>Hello</Text>
                     <Pressable
                         style={({ pressed }) => [
                             {

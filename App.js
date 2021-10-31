@@ -55,32 +55,20 @@ const App = () => {
     //   </Stack.Navigator>
     // </NavigationContainer>
     <NavigationContainer>
-      <Stack.Navigator>
-        {user ? (
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-          >
-            {/* {props => <HomeScreen {...props} extraData={user} />} */}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-            >
-              {/* {props => <HomeScreen {...props} extraData={user} />} */}
-            </Stack.Screen>
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{ headerShown: false}} />
-            <Stack.Screen
-              name="Register"
-              component={RegisterScreen}
-              options={{ headerTitle: "Register" }} />
-          </>
-        )}
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+        >
+        </Stack.Screen>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen} 
+          options={{ headerShown: false}}/>
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

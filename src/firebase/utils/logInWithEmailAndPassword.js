@@ -1,13 +1,14 @@
+import { Alert } from 'react-native'
 import { auth, firestore } from '../firebase'
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
+        // Alert.alert(email);
         const signInResponse = await auth.signInWithEmailAndPassword(email, password)
-
         return await getUser(signInResponse)
     }
     catch (error) {
-        alert(error)
+        // alert(error)
         console.log(error)
     }
 }

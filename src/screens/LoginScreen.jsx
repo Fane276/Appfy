@@ -1,8 +1,7 @@
 
 import React, { useState  } from 'react'
-import {View, Text, TextInput,StyleSheet, SafeAreaView, Pressable, Alert } from 'react-native'
-import { Image, Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import { Image } from 'react-native-elements';
 
 
 import colors from '../assets/colors/colors';
@@ -12,11 +11,10 @@ import { logInWithEmailAndPassword } from '../firebase/utils/logInWithEmailAndPa
 import GradientBackground from '../components/GradientBackground';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faEgg, faEnvelope, faGhost, faLock } from '@fortawesome/free-solid-svg-icons'
-import { useController, useForm, useFormState } from 'react-hook-form';
+import { faEnvelope, faGhost, faLock } from '@fortawesome/free-solid-svg-icons'
+import { useForm, useFormState } from 'react-hook-form';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import FormInput from '../components/FormInput';
-import { SocialIcon } from 'react-native-elements'
 
 
 
@@ -32,23 +30,23 @@ function LoginScreen ({ navigation, route}){
   });
   const onSubmit = (data) => {
     if(dirtyFields){
-      Alert.alert(JSON.stringify(data))
-      onLoginPress()
+      // console.error(data.emailAddress, data.password)
+      // Alert.alert(JSON.stringify(data))
+      onLoginPress(data)
     }
   };
   const { dirtyFields } = useFormState({
     control
   });
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onLoginPress = async () => {
-    const userData = await logInWithEmailAndPassword(email, password)
-    if (userData) {
-      navigation.navigate("Home")
-      // navigation.navigate("Home", { user })
-    }
+  const onLoginPress = async ({emailAddress, password}) => {
+    logInWithEmailAndPassword(emailAddress, password).then((userData)=>{
+      navigation.navigate("Home", { userData: "dorel" })
+      if (userData) {
+        // navigation.navigate("Home")
+      }
+    })
+    
   }
 
   return (
@@ -119,7 +117,7 @@ function LoginScreen ({ navigation, route}){
               </Text>
               <TouchableOpacity 
                 onPress={async ()=>{
-                  navigation.navigate('RegisterUser')
+                  navigation.navigate('Register')
                 }}
                 >
                 <Text style={styles.register}>
