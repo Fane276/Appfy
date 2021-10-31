@@ -26,4 +26,5 @@ const rtdb = app.database();
 const providerGoogle = new firebase.auth.GoogleAuthProvider();
 const providerFacebook = new firebase.auth.FacebookAuthProvider();
 
+
 export { firestore, rtdb, auth, providerGoogle, providerFacebook };

@@ -18,8 +18,22 @@ import FormInput from '../components/FormInput';
 
 
 
+
+const getUserData= async ()=>{
+  try{
+      var userJson = await AsyncStorage.getItem(AsyncStorageConsts.userDataJson);
+      return userJson != null ? JSON.parse(userJson) : null; 
+  }
+  catch{
+      // de facut ceva aici
+  }
+}
+
 function LoginScreen ({ navigation, route}){
-  console.log(route);
+  const [userData, setUserData] = useState(null);
+    getUserData().then((data)=>{
+        setUserData(data);
+    })
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues:{

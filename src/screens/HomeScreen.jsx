@@ -1,15 +1,34 @@
 import React from 'react'
 import { Pressable, Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorageConsts from '../assets/AppConstants/AsyncStorgeConsts'
 import colors from '../assets/colors/colors';
+import { useState } from 'react';
+import {auth} from '../firebase/firebase';
+
+
+
+const getUserData= async ()=>{
+    try{
+        var userJson = await AsyncStorage.getItem(AsyncStorageConsts.userDataJson);
+        return userJson != null ? JSON.parse(userJson) : null; 
+    }
+    catch{
+        // de facut ceva aici
+    }
+}
+
 
 const HomeScreen = ({ navigation, route }) => {
-    // const { userData } = route.params;
+    const [userData, setUserData] = useState(null);
+    getUserData().then((data)=>{
+        setUserData(data);
+    })
     return (
         <ScrollView>
             <SafeAreaView>
                 <View style={styles.container}>
-                    <Text>Hello</Text>
+                    <Text>{userData==null ? "":userData.email}</Text>
                     <Pressable
                         style={({ pressed }) => [
                             {
@@ -17,7 +36,7 @@ const HomeScreen = ({ navigation, route }) => {
                             },
                             styles.lightButton]}
                         onPress={async () => {
-                            navigation.navigate('Login')
+                            await auth.signOut();
                         }}
                     >
                         <Text style={styles.lightButtonText}>Log Out</Text>

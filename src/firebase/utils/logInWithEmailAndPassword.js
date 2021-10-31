@@ -1,5 +1,8 @@
 import { Alert } from 'react-native'
 import { auth, firestore } from '../firebase'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorageConsts from '../../assets/AppConstants/AsyncStorgeConsts'
+
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -22,6 +25,8 @@ const getUser = async (signInResponse) => {
         .get()
 
     const user = userDoc.data()
+
+    await AsyncStorage.setItem(AsyncStorageConsts.userDataJson, JSON.stringify(user))
 
     return user
 }

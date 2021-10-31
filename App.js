@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import HomeScreen from "./src/screens/HomeScreen";
+import SplashScreen from './src/screens/SplashScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -37,25 +38,14 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator
-    //     initialRouteName="Login">
-    //     <Tab.Screen
-    //       name="Login"
-    //       component={LoginScreen}
-    //     />
-    //     <Stack.Screen
-    //       name="RegisterUser"
-    //       component={RegisterScreen}
-    //       options={{ headerTitle: "Register user" }} />
-    //     <Stack.Screen
-    //       name="Home"
-    //       component={HomeScreen}
-    //       options={{ headerTitle: "Home Screen" }} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='SplashScreen'>
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{ headerShown: false}}
+        >
+        </Stack.Screen>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
