@@ -5,7 +5,7 @@ import colors  from '../assets/colors/colors';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-const FormInput = ({name, placeholder, icon,label,  rules,control, secure })=>{
+const FormInput = ({name, placeholder, icon,label,  rules,control, secure, errorMessage })=>{
   const {
     field,
     fieldState: { invalid, isTouched, isDirty, isValid }
@@ -34,19 +34,25 @@ const FormInput = ({name, placeholder, icon,label,  rules,control, secure })=>{
     onFocus={()=>onFocusChange(true)}
     onBlur={()=>onFocusChange(false)}
     inputContainerStyle={isFocused? styles.inputOnFocus : styles.input}
+    // inputContainerStyle={{borderBottomWidth: 0}}
     secureTextEntry={secure}
     errorStyle={{ color: 'red' }}
-    errorMessage={invalid?'Please provide a valid email':""}
+    errorMessage={!isDirty || invalid?errorMessage:""}
   />
   )
 }
 
 const styles = StyleSheet.create({
   input:{
-    borderBottomColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+    borderBottomWidth: 0
   },
   inputOnFocus:{
-    color: colors.primary
+    backgroundColor: colors.inputFocusBackground,
+    borderRadius: 20,
+    borderBottomWidth: 0,
+    paddingHorizontal: 10,
   }
 })
 

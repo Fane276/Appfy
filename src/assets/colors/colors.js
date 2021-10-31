@@ -8,6 +8,7 @@ const colors = {
   inputBackground: '#f7f7f7',
   invalidInput: '#db2800',
   lightBackground: '#fcfcfc',
+  inputFocusBackground: '#32373d'
 };
 
 export default colors;

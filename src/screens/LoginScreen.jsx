@@ -26,7 +26,11 @@ function LoginScreen ({ navigation, route}){
     },
     mode: "onBlur"
   });
-  const onSubmit = (data) => Alert.alert(JSON.stringify(data));
+  const onSubmit = (data) => {
+    if(dirtyFields){
+      Alert.alert(JSON.stringify(data))
+    }
+  };
   const { dirtyFields } = useFormState({
     control
   });
@@ -60,6 +64,7 @@ function LoginScreen ({ navigation, route}){
               placeholder="email@address.com"
               label="Email address"
               name="emailAddress" 
+              errorMessage="Please provide a valid email address"
               control={control} 
             />
             <FormInput 
@@ -74,6 +79,7 @@ function LoginScreen ({ navigation, route}){
               placeholder="Password"
               label="Password"
               name="password" 
+              errorMessage="Please enter a password"
               control={control} 
             />
             <TouchableOpacity 
