@@ -8,7 +8,7 @@ const logInWithEmailAndPassword = async (email, password) => {
     try {
         // Alert.alert(email);
         const signInResponse = await auth.signInWithEmailAndPassword(email, password)
-        return await getUser(signInResponse)
+        return await getUser(signInResponse.user.uid)
     }
     catch (error) {
         alert(error)
@@ -16,9 +16,7 @@ const logInWithEmailAndPassword = async (email, password) => {
     }
 }
 
-const getUser = async (signInResponse) => {
-    const uid = signInResponse.user.uid
-
+const getUser = async (uid) => {
     const userDoc = await firestore
         .collection('users')
         .doc(uid)

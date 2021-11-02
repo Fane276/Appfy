@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "19862592131",
+    "project_id": "appfy-330417",
+    "storage_bucket": "appfy-330417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19862592131:android:00f74bcfe0546626e299b6",
+        "android_client_info": {
+          "package_name": "com.appfy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHlsrlorD9a2CLBrfXk2uEIHPKvOh9iGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,40 +1,38 @@
-
-import React, { useState  } from 'react'
-import {View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
 import { Image } from 'react-native-elements';
-
 
 import colors from '../assets/colors/colors';
 
 import { logInWithEmailAndPassword } from '../firebase/utils/logInWithEmailAndPassword'
+import { onGoogleButtonPress } from '../firebase/utils/googleSignIn'
 
 import GradientBackground from '../components/GradientBackground';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faEnvelope, faGhost, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faGoogle, faFacebookF, faApple } from '@fortawesome/free-brands-svg-icons'
 import { useForm, useFormState } from 'react-hook-form';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import FormInput from '../components/FormInput';
 
 
-
-
-function LoginScreen ({ navigation, route}){
+function LoginScreen({ navigation, route }) {
 
   const { control, handleSubmit, formState: { errors } } = useForm({
-    defaultValues:{
-      emailAddress:'',
-      password:''
+    defaultValues: {
+      emailAddress: '',
+      password: ''
     },
     mode: "onBlur"
   });
   const onSubmit = (data) => {
-    if(dirtyFields){
+    if (dirtyFields) {
       // console.error(data.emailAddress, data.password)
       // Alert.alert(JSON.stringify(data))
       onLoginPress(data)
     }
-    else{
+    else {
       Alert.alert("Please provide valid login informations")
     }
   };
@@ -42,15 +40,15 @@ function LoginScreen ({ navigation, route}){
     control
   });
 
-  const onLoginPress = async ({emailAddress, password}) => {
-    logInWithEmailAndPassword(emailAddress, password).then((userData)=>{
+  const onLoginPress = async ({ emailAddress, password }) => {
+    logInWithEmailAndPassword(emailAddress, password).then((userData) => {
       Alert(JSON.stringify(userData));
       if (userData) {
         navigation.navigate("Home")
         // navigation.navigate("Home")
       }
     })
-    
+
   }
 
   return (
@@ -60,13 +58,13 @@ function LoginScreen ({ navigation, route}){
         <SafeAreaView>
           <View>
             <View style={styles.logoContainer}>
-              <Image 
+              <Image
                 source={require("../assets/img/AppfyLogo.png")}
                 style={styles.logo}
-                />
+              />
             </View>
-            
-            <FormInput 
+
+            <FormInput
               rules={{
                 require: true,
                 pattern: {
@@ -75,31 +73,31 @@ function LoginScreen ({ navigation, route}){
                 }
               }}
               icon={
-                <FontAwesomeIcon icon={ faEnvelope } color={colors.lightBackground} />
+                <FontAwesomeIcon icon={faEnvelope} color={colors.lightBackground} />
               }
               placeholder="email@address.com"
               label="Email address"
-              name="emailAddress" 
+              name="emailAddress"
               errorMessage="Please provide a valid email address"
-              control={control} 
+              control={control}
             />
-            <FormInput 
+            <FormInput
               rules={{
                 require: true,
                 pattern: null
               }}
               secure={true}
               icon={
-                <FontAwesomeIcon icon={ faLock } color={colors.lightBackground} />
+                <FontAwesomeIcon icon={faLock} color={colors.lightBackground} />
               }
               placeholder="Password"
               label="Password"
-              name="password" 
+              name="password"
               errorMessage="Please enter a password"
-              control={control} 
+              control={control}
             />
-            <TouchableOpacity 
-              style = {styles.loginButton}
+            <TouchableOpacity
+              style={styles.loginButton}
               onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginButtonText}>Login</Text>
 
@@ -109,28 +107,36 @@ function LoginScreen ({ navigation, route}){
                 Forgot password?
               </Text>
             </TouchableOpacity>
-            
+
             <View style={styles.registerWraper}>
-              <TouchableOpacity style={styles.socialButton}>
-                <FontAwesomeIcon icon={ faGhost } color={"#4267B2"}/>
+              <TouchableOpacity
+                style={styles.socialButton}
+                onPress={async () => onGoogleButtonPress().then(() => { navigation.navigate("Home") })}>
+                <FontAwesomeIcon icon={faGoogle} color={"#4267B2"} />
               </TouchableOpacity>
-            </View>  
+              <TouchableOpacity style={styles.socialButton}>
+                <FontAwesomeIcon icon={faFacebookF} color={"#4267B2"} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.socialButton}>
+                <FontAwesomeIcon icon={faApple} color={"#4267B2"} />
+              </TouchableOpacity>
+            </View>
             <View style={styles.registerWraper}>
               <Text style={styles.registerMessage}>
-                  Dont have and account?
+                Dont have and account?
               </Text>
-              <TouchableOpacity 
-                onPress={async ()=>{
+              <TouchableOpacity
+                onPress={async () => {
                   navigation.navigate('Register')
                 }}
-                >
+              >
                 <Text style={styles.register}>
                   Register
                 </Text>
               </TouchableOpacity>
-            </View>  
-            
-            
+            </View>
+
+
           </View>
         </SafeAreaView>
       </View>
@@ -139,15 +145,15 @@ function LoginScreen ({ navigation, route}){
 };
 
 const styles = StyleSheet.create({
-  container:{
-    padding:10,
+  container: {
+    padding: 10,
     paddingTop: 50,
   },
-  logoContainer:{
+  logoContainer: {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logo:{
+  logo: {
     height: 200,
     width: 200,
     alignItems: 'center',
@@ -163,14 +169,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingLeft: 10,
   },
-  loginButton:{
-    height:60,
+  loginButton: {
+    height: 60,
     borderRadius: 30,
     backgroundColor: colors.primary,
     marginTop: 10,
     marginHorizontal: 60,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loginButtonText: {
     padding: 5,
@@ -179,9 +185,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.textDark,
   },
-  socialButton:{
-    height:40,
-    width:40,
+  socialButton: {
+    height: 40,
+    width: 40,
     borderRadius: 20,
     backgroundColor: colors.lightBackground,
     shadowOpacity: 1,
@@ -193,8 +199,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     shadowRadius: 1,
     margin: 10,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     // borderColor: colors.textDisabled,
     // borderWidth: 1,
   },
@@ -213,29 +219,29 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  registerWraper:{
-    marginTop:10,
-    flexDirection:'row',
-    alignItems:'center',
+  registerWraper: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
   },
-  forgotPassword:{
+  forgotPassword: {
     color: colors.primary,
     textAlign: 'center',
     marginTop: 10
   },
-  register:{
+  register: {
     color: colors.primary,
     textAlign: 'center',
     textAlignVertical: 'center',
     alignSelf: 'center',
     marginLeft: 5
   },
-  registerMessage:{
+  registerMessage: {
     color: colors.textDark,
     textAlign: 'center',
-    flexDirection:'row',
-    alignItems:'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   }
 });
 

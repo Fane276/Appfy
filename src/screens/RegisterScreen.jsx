@@ -12,36 +12,38 @@ import colors from '../assets/colors/colors';
 
 import { registerUserWithEmailAndPassword } from '../firebase/utils/registerWithEmailAndPassword'
 
-const RegisterScreen = ({ navigation, route }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+const RegisterScreen = ({ navigation, route }) => {
   const { control, handleSubmit, formState: { errors } } = useForm({
-    defaultValues:{
-      name:'',
-      emailAddress:'',
-      password:''
+    defaultValues: {
+      name: '',
+      emailAddress: '',
+      password: ''
     },
     mode: "onBlur"
   });
-  const onSubmit = (data) => {
-    if(dirtyFields){
-      // Alert.alert(JSON.stringify(data))
-      onRegisterPress({...data })
+
+  const onSubmit = async (data) => {
+    try {
+      // alert(JSON.stringify(data))
+      // await sleep(4000);
+      if (dirtyFields) {
+        // Alert.alert(JSON.stringify(data))
+        await registerUserWithEmailAndPassword(data)
+        navigation.navigate("Home")
+      }
+    }
+    catch (error) {
+      alert(error)
     }
   };
+
   const { dirtyFields } = useFormState({
     control
   });
-
-  const onRegisterPress = async ({name, emailAddress, password}) => {
-    const userData = await registerUserWithEmailAndPassword(emailAddress, password, password)
-    if(userData) {
-      navigation.navigate("Home")
-      // navigation.navigate("Home", {user: userData})
-    }
-  }
 
   return (
     <GradientBackground style={styles.background}>
@@ -50,26 +52,26 @@ const RegisterScreen = ({ navigation, route }) => {
         <SafeAreaView>
           <View>
             <View style={styles.logoContainer}>
-              <Image 
+              <Image
                 source={require("../assets/img/AppfyLogo.png")}
                 style={styles.logo}
-                />
+              />
             </View>
-            
-            <FormInput 
+
+            <FormInput
               rules={{
                 require: true
               }}
               icon={
-                <FontAwesomeIcon icon={ faUser } color={colors.lightBackground} />
+                <FontAwesomeIcon icon={faUser} color={colors.lightBackground} />
               }
               placeholder="First name and last name"
               label="Full Name"
-              name="fullName" 
+              name="fullName"
               errorMessage="This field should not be empty"
-              control={control} 
+              control={control}
             />
-            <FormInput 
+            <FormInput
               rules={{
                 require: true,
                 pattern: {
@@ -78,52 +80,52 @@ const RegisterScreen = ({ navigation, route }) => {
                 }
               }}
               icon={
-                <FontAwesomeIcon icon={ faEnvelope } color={colors.lightBackground} />
+                <FontAwesomeIcon icon={faEnvelope} color={colors.lightBackground} />
               }
               placeholder="email@address.com"
               label="Email address"
-              name="emailAddress" 
+              name="emailAddress"
               errorMessage="Please provide a valid email address"
-              control={control} 
+              control={control}
             />
-            <FormInput 
+            <FormInput
               rules={{
                 require: true,
                 pattern: null
               }}
               secure={true}
               icon={
-                <FontAwesomeIcon icon={ faLock } color={colors.lightBackground} />
+                <FontAwesomeIcon icon={faLock} color={colors.lightBackground} />
               }
               placeholder="Password"
               label="Password"
-              name="password" 
+              name="password"
               errorMessage="Please enter a password"
-              control={control} 
+              control={control}
             />
-            <TouchableOpacity 
-              style = {styles.loginButton}
+            <TouchableOpacity
+              style={styles.loginButton}
               onPress={handleSubmit(onSubmit)}>
               <Text style={styles.loginButtonText}>Register</Text>
 
             </TouchableOpacity>
-            
+
             <View style={styles.registerWraper}>
               <Text style={styles.registerMessage}>
-                  Already have an account?
+                Already have an account?
               </Text>
-              <TouchableOpacity 
-                onPress={async ()=>{
+              <TouchableOpacity
+                onPress={async () => {
                   navigation.navigate('Login')
                 }}
-                >
+              >
                 <Text style={styles.register}>
                   Log in
                 </Text>
               </TouchableOpacity>
-            </View>  
-            
-            
+            </View>
+
+
           </View>
         </SafeAreaView>
       </View>
@@ -134,15 +136,15 @@ const RegisterScreen = ({ navigation, route }) => {
 
 
 const styles = StyleSheet.create({
-  container:{
-    padding:10,
+  container: {
+    padding: 10,
     paddingTop: 50,
   },
-  logoContainer:{
+  logoContainer: {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logo:{
+  logo: {
     height: 200,
     width: 200,
     alignItems: 'center',
@@ -158,14 +160,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingLeft: 10,
   },
-  loginButton:{
-    height:60,
+  loginButton: {
+    height: 60,
     borderRadius: 30,
     backgroundColor: colors.primary,
     marginTop: 10,
     marginHorizontal: 60,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loginButtonText: {
     padding: 5,
@@ -174,9 +176,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.textDark,
   },
-  socialButton:{
-    height:40,
-    width:40,
+  socialButton: {
+    height: 40,
+    width: 40,
     borderRadius: 20,
     backgroundColor: colors.lightBackground,
     shadowOpacity: 1,
@@ -188,8 +190,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     shadowRadius: 1,
     margin: 10,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     // borderColor: colors.textDisabled,
     // borderWidth: 1,
   },
@@ -208,29 +210,29 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  registerWraper:{
-    marginTop:10,
-    flexDirection:'row',
-    alignItems:'center',
+  registerWraper: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
   },
-  forgotPassword:{
+  forgotPassword: {
     color: colors.primary,
     textAlign: 'center',
     marginTop: 10
   },
-  register:{
+  register: {
     color: colors.primary,
     textAlign: 'center',
     textAlignVertical: 'center',
     alignSelf: 'center',
     marginLeft: 5
   },
-  registerMessage:{
+  registerMessage: {
     color: colors.textDark,
     textAlign: 'center',
-    flexDirection:'row',
-    alignItems:'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   }
 });
 

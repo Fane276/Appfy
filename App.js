@@ -16,7 +16,12 @@ import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import SplashScreen from './src/screens/SplashScreen';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
+
+// GoogleSignin.configure({
+//   webClientId: '19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com',
+// });
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -34,16 +39,13 @@ function Register() {
 
 
 const App = () => {
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(null)
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='SplashScreen'>
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
-          options={{ headerShown: false}}
+          options={{ headerShown: false }}
         >
         </Stack.Screen>
         <Stack.Screen
@@ -53,8 +55,8 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen
           name="Login"
-          component={LoginScreen} 
-          options={{ headerShown: false}}/>
+          component={LoginScreen}
+          options={{ headerShown: false }} />
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
