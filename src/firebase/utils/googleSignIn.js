@@ -3,7 +3,7 @@ import { auth, providerGoogle } from '../firebase'
 import { saveNewUser } from './saveNewUser';
 
 
-const onGoogleButtonPress = async () => {
+const googleSignIn = async () => {
     // Get the users ID token
     // await GoogleSignin.hasPlayServices();
     const { idToken } = await GoogleSignin.signIn()
@@ -19,4 +19,4 @@ const onGoogleButtonPress = async () => {
     }
 }
 
-export { onGoogleButtonPress }
+export { googleSignIn }

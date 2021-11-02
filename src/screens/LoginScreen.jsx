@@ -5,7 +5,7 @@ import { Image } from 'react-native-elements';
 import colors from '../assets/colors/colors';
 
 import { logInWithEmailAndPassword } from '../firebase/utils/logInWithEmailAndPassword'
-import { onGoogleButtonPress } from '../firebase/utils/googleSignIn'
+import { googleSignIn } from '../firebase/utils/googleSignIn'
 
 import GradientBackground from '../components/GradientBackground';
 
@@ -27,10 +27,10 @@ function LoginScreen({ navigation, route }) {
     mode: "onBlur"
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async ({ emailAddress, password }) => {
     try {
       if (dirtyFields) {
-        await logInWithEmailAndPassword(data.emailAddress, data.password)
+        await logInWithEmailAndPassword(emailAddress, password)
         navigation.navigate("Home")
       }
       else {
@@ -38,13 +38,22 @@ function LoginScreen({ navigation, route }) {
       }
     }
     catch (error) {
-      Alert.alert(error)
+      Alert.alert(error.message)
     }
   };
 
   const { dirtyFields } = useFormState({
     control
   });
+
+  const onGoogleButtonPress = async () => {
+    try {
+      await googleSignIn();
+    }
+    catch (error) {
+      Alert.alert(error.message)
+    }
+  }
 
   return (
     <GradientBackground style={styles.background}>
@@ -106,7 +115,7 @@ function LoginScreen({ navigation, route }) {
             <View style={styles.registerWraper}>
               <TouchableOpacity
                 style={styles.socialButton}
-                onPress={async () => onGoogleButtonPress().then(() => { navigation.navigate("Home") })}>
+                onPress={onGoogleButtonPress}>
                 <FontAwesomeIcon icon={faGoogle} color={"#4267B2"} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.socialButton}>
