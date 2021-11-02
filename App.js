@@ -26,17 +26,6 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function Register() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="RegisterUser"
-        component={RegisterScreen}
-        options={{ headerTitle: "Register user" }} />
-    </Stack.Navigator>
-  );
-}
-
 
 const App = () => {
   return (

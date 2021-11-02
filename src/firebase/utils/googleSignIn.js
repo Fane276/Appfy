@@ -1,14 +1,12 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { auth, firestore, providerGoogle } from '../firebase'
+import { auth, providerGoogle } from '../firebase'
 import { saveNewUser } from './saveNewUser';
 
 
 const onGoogleButtonPress = async () => {
     // Get the users ID token
     // await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn().then((userInfo) => { alert(JSON.stringify(userInfo)) }).catch((error) => alert(error));
-
-    alert(JSON.stringify(userInfo))
+    const { idToken } = await GoogleSignin.signIn()
 
     // Create a Google credential with the token
     const googleCredential = providerGoogle.credential(idToken);

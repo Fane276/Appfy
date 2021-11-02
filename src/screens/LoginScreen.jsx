@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
 import { Image } from 'react-native-elements';
 
@@ -26,30 +26,25 @@ function LoginScreen({ navigation, route }) {
     },
     mode: "onBlur"
   });
+
   const onSubmit = (data) => {
-    if (dirtyFields) {
-      // console.error(data.emailAddress, data.password)
-      // Alert.alert(JSON.stringify(data))
-      onLoginPress(data)
+    try {
+      if (dirtyFields) {
+        await logInWithEmailAndPassword(data.emailAddress, data.password)
+        navigation.navigate("Home")
+      }
+      else {
+        Alert.alert("Please provide valid login information")
+      }
     }
-    else {
-      Alert.alert("Please provide valid login informations")
+    catch (error) {
+      Alert.alert(error)
     }
   };
+
   const { dirtyFields } = useFormState({
     control
   });
-
-  const onLoginPress = async ({ emailAddress, password }) => {
-    logInWithEmailAndPassword(emailAddress, password).then((userData) => {
-      Alert(JSON.stringify(userData));
-      if (userData) {
-        navigation.navigate("Home")
-        // navigation.navigate("Home")
-      }
-    })
-
-  }
 
   return (
     <GradientBackground style={styles.background}>

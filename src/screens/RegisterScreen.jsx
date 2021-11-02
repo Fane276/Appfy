@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Button, Text, TextInput, StyleSheet, SafeAreaView, Pressable, Image, ScrollView } from 'react-native'
+import React from 'react'
+import { View, Text, StyleSheet, SafeAreaView, Image, Alert } from 'react-native'
 
 import GradientBackground from '../components/GradientBackground';
 
@@ -11,10 +11,6 @@ import FormInput from '../components/FormInput';
 import colors from '../assets/colors/colors';
 
 import { registerUserWithEmailAndPassword } from '../firebase/utils/registerWithEmailAndPassword'
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 const RegisterScreen = ({ navigation, route }) => {
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -28,16 +24,16 @@ const RegisterScreen = ({ navigation, route }) => {
 
   const onSubmit = async (data) => {
     try {
-      // alert(JSON.stringify(data))
-      // await sleep(4000);
       if (dirtyFields) {
-        // Alert.alert(JSON.stringify(data))
         await registerUserWithEmailAndPassword(data)
         navigation.navigate("Home")
       }
+      else {
+        Alert.alert("Please provide valid sign in information")
+      }
     }
     catch (error) {
-      alert(error)
+      Alert.alert(error)
     }
   };
 

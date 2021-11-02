@@ -1,41 +1,41 @@
 import React, { useEffect } from 'react'
-import {  View } from 'react-native'
+import { View } from 'react-native'
 import GradientBackground from '../components/GradientBackground';
 import { Image } from 'react-native-elements';
-import {auth} from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
 
-function SplashScreen ({ navigation}){
+function SplashScreen({ navigation }) {
 
-  useEffect(()=>{
+  useEffect(() => {
     NavigateToLoginOrHome()
-  },[navigation])
+  }, [navigation])
 
 
-  function NavigateToLoginOrHome(){
-    setTimeout(function (){
-      auth.onAuthStateChanged((user)=>{
-        if(user!=null){
+  function NavigateToLoginOrHome() {
+    setTimeout(function () {
+      auth.onAuthStateChanged((user) => {
+        if (user != null) {
           navigation.reset({
-            index:0,
-            routes:[{name: 'Home'}]
+            index: 0,
+            routes: [{ name: 'Home' }]
           })
         }
-        else{
+        else {
           navigation.reset({
-            index:0,
-            routes:[{name: 'Login'}]
+            index: 0,
+            routes: [{ name: 'Login' }]
           })
         }
       })
     }, 1000)
   }
-  return(
-    <GradientBackground >
-      <View style={{height:'100%', justifyContent: 'center', alignItems: 'center'}}>
 
-      <Image 
-        source={require("../assets/img/AppfyLogo.png")}
-        style={{width: 200, height: 200}}
+  return (
+    <GradientBackground >
+      <View style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Image
+          source={require("../assets/img/AppfyLogo.png")}
+          style={{ width: 200, height: 200 }}
         />
       </View>
     </GradientBackground>
