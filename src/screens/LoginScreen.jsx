@@ -4,7 +4,6 @@ import { Image } from 'react-native-elements';
 
 import colors from '../assets/colors/colors';
 
-import { logInWithEmailAndPassword } from '../firebase/utils/logInWithEmailAndPassword'
 import { googleSignIn } from '../firebase/utils/googleSignIn'
 
 import GradientBackground from '../components/GradientBackground';
@@ -30,8 +29,7 @@ function LoginScreen({ navigation, route }) {
   const onSubmit = async ({ emailAddress, password }) => {
     try {
       if (dirtyFields) {
-        await logInWithEmailAndPassword(emailAddress, password)
-        navigation.navigate("Home")
+        navigation.navigate("LoadingScreen", {emailAddress, password})
       }
       else {
         Alert.alert("Please provide valid login information")

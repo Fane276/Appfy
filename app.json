@@ -3,6 +3,9 @@
   "displayName": "Appfy",
   "expo": {
     "name": "Appfy",
-    "slug": "appfy"
+    "slug": "appfy",
+    "android": {
+      "package": "com.appfy"
+    }
   }
 }
