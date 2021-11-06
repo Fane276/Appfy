@@ -47,14 +47,11 @@ const App = () => {
         <Stack.Screen
           name="LoadingScreen"
           component={LoadingScreen}
-          options={{ headerShown: false }} 
-        >
-        </Stack.Screen>
-        {/* <Stack.Screen
+          options={{ headerShown: false }} />
+        <Stack.Screen
           name="ProfileScreen"
           component={ProfileScreen}
-        >
-        </Stack.Screen> */}
+          options={{ headerShown: false }} />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
