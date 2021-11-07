@@ -32,7 +32,7 @@ function LoadingScreen({ navigation, route }) {
 
     }
     catch{
-      alert("Please provide valid login information");
+      alert(t('lang:invalidLogin'));
       // navigation.pop();
     }
   }

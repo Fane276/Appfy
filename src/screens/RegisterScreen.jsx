@@ -29,7 +29,7 @@ const RegisterScreen = ({ navigation, route }) => {
         navigation.navigate("Home")
       }
       else {
-        Alert.alert("Please provide valid sign in information")
+        Alert.alert(t('lang:invalidLogin'))
       }
     }
     catch (error) {
@@ -61,10 +61,10 @@ const RegisterScreen = ({ navigation, route }) => {
               icon={
                 <FontAwesomeIcon icon={faUser} color={colors.lightBackground} />
               }
-              placeholder="First name and last name"
-              label="Full Name"
+              placeholder={t('lang:name')}
+              label={t('lang:name')}
               name="fullName"
-              errorMessage="This field should not be empty"
+              errorMessage={t('lang:errName')}
               control={control}
             />
             <FormInput
@@ -72,16 +72,16 @@ const RegisterScreen = ({ navigation, route }) => {
                 require: true,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "invalid email address"
+                  message: t('lang:errInvalidEmail')
                 }
               }}
               icon={
                 <FontAwesomeIcon icon={faEnvelope} color={colors.lightBackground} />
               }
               placeholder="email@address.com"
-              label="Email address"
+              label={t('lang:email')}
               name="emailAddress"
-              errorMessage="Please provide a valid email address"
+              errorMessage={t('lang:invalidEmail')}
               control={control}
             />
             <FormInput
@@ -93,22 +93,22 @@ const RegisterScreen = ({ navigation, route }) => {
               icon={
                 <FontAwesomeIcon icon={faLock} color={colors.lightBackground} />
               }
-              placeholder="Password"
-              label="Password"
+              placeholder={t('lang:password')}
+              label={t('lang:password')}
               name="password"
-              errorMessage="Please enter a password"
+              errorMessage={t('lang:errPassword')}
               control={control}
             />
             <TouchableOpacity
               style={styles.loginButton}
               onPress={handleSubmit(onSubmit)}>
-              <Text style={styles.loginButtonText}>Register</Text>
+              <Text style={styles.loginButtonText}>{t('lang:register')}</Text>
 
             </TouchableOpacity>
 
             <View style={styles.registerWraper}>
               <Text style={styles.registerMessage}>
-                Already have an account?
+                {t('lang:existentAccount')}
               </Text>
               <TouchableOpacity
                 onPress={async () => {
@@ -116,7 +116,7 @@ const RegisterScreen = ({ navigation, route }) => {
                 }}
               >
                 <Text style={styles.register}>
-                  Log in
+                  {t('lang:login')}
                 </Text>
               </TouchableOpacity>
             </View>

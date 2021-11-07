@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation, route }) => {
                             await auth.signOut();
                         }}
                     >
-                        <Text style={styles.lightButtonText}>Log Out</Text>
+                        <Text style={styles.lightButtonText}>{t('lang:logout')}</Text>
                     </Pressable>
                 </View>
             </SafeAreaView>

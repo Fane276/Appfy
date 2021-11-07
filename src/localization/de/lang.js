@@ -14,4 +14,5 @@ export default {
     noAccount: 'Kein Konto?',
     name: 'Vorname und Nachname',
     errName: 'Dieses Feld darf nicht leer sein!',
+    existentAccount: "Haben Sie schon ein Konto?"
   }

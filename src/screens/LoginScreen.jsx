@@ -35,7 +35,7 @@ function LoginScreen({ navigation, route }) {
         navigation.navigate("LoadingScreen", {emailAddress, password})
       }
       else {
-        Alert.alert("Please provide valid login information")
+        Alert.alert(t('lang:invalidLogin'))
       }
     }
     catch (error) {
@@ -76,14 +76,14 @@ function LoginScreen({ navigation, route }) {
                 require: true,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "invalid email address"
+                  message: t('lang:errInvalidEmail')
                 }
               }}
               icon={
                 <FontAwesomeIcon icon={faEnvelope} color={colors.lightBackground} />
               }
               placeholder="email@address.com"
-              label="Email address"
+              label={t('lang:email')}
               name="emailAddress"
               errorMessage={t('lang:invalidEmail')}
               control={control}
@@ -97,8 +97,8 @@ function LoginScreen({ navigation, route }) {
               icon={
                 <FontAwesomeIcon icon={faLock} color={colors.lightBackground} />
               }
-              placeholder="Password"
-              label="Password"
+              placeholder={t('lang:password')}
+              label={t('lang:password')}
               name="password"
               errorMessage={t('lang:errPassword')}
               control={control}
@@ -109,9 +109,9 @@ function LoginScreen({ navigation, route }) {
               <Text style={styles.loginButtonText}>{t('lang:login')}</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{i18n.changeLanguage("de");}}>
+            <TouchableOpacity>
               <Text style={styles.forgotPassword}>
-                Forgot password?
+                {t('lang:forgotPassword')}
               </Text>
             </TouchableOpacity>
 
@@ -130,7 +130,7 @@ function LoginScreen({ navigation, route }) {
             </View>
             <View style={styles.registerWraper}>
               <Text style={styles.registerMessage}>
-                Dont have and account?
+                {t('lang:noAccount')}
               </Text>
               <TouchableOpacity
                 onPress={async () => {
@@ -138,7 +138,7 @@ function LoginScreen({ navigation, route }) {
                 }}
               >
                 <Text style={styles.register}>
-                  Register
+                  {t('lang:register')}
                 </Text>
               </TouchableOpacity>
             </View>
