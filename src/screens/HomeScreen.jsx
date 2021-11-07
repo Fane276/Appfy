@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation, route }) => {
                     <TouchableOpacity style = {styles.lightButton}
                         onPress={()=> navigation.navigate("ProfileScreen")}
                     >
-                        <Text style={styles.lightButtonText}>Profile</Text>
+                        <Text style={styles.lightButtonText}>{t('lang:profile')}</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>

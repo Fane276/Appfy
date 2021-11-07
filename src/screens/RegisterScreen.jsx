@@ -1,18 +1,18 @@
 import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Image, Alert } from 'react-native'
-
 import GradientBackground from '../components/GradientBackground';
-
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useForm, useFormState } from 'react-hook-form';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import FormInput from '../components/FormInput';
 import colors from '../assets/colors/colors';
-
 import { useTranslation } from 'react-i18next';
-
 import { registerUserWithEmailAndPassword } from '../firebase/utils/registerWithEmailAndPassword'
+import { Dimensions } from 'react-native';
+
+
+const screenHeight = Dimensions.get('screen').height;
 
 const RegisterScreen = ({ navigation, route }) => {
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -46,6 +46,8 @@ const RegisterScreen = ({ navigation, route }) => {
   });
 
   return (
+    <ScrollView>
+
     <GradientBackground style={styles.background}>
 
       <View style={styles.container}>
@@ -130,6 +132,7 @@ const RegisterScreen = ({ navigation, route }) => {
         </SafeAreaView>
       </View>
     </GradientBackground>
+    </ScrollView>
   )
 };
 
@@ -139,6 +142,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 50,
+    height:screenHeight
   },
   logoContainer: {
     alignItems: 'center',

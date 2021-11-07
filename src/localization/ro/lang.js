@@ -1,7 +1,7 @@
 export default {
     hello: 'Buna',
     languageSelector: 'Alegeti limba de afisaj',
-    logout: 'Deautentificare',
+    logout: 'Delogare',
     invalidLogin: 'Introduceti date de autentificare valide',
     invalidEmail: 'Introduceti o adresa e-mail valida',
     errInvalidEmail: 'adresa email invalida',

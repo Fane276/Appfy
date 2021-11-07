@@ -11,6 +11,7 @@ import { TouchableOpacity } from 'react-native';
 import { Overlay } from 'react-native-elements';
 import { ListItem } from 'react-native-elements';
 import { useTranslation } from 'react-i18next'
+import { LinearGradient } from 'expo-linear-gradient';
 
 const getUserData= async ()=>{
     try{
@@ -65,7 +66,19 @@ const ProfileScreen = ({ navigation, route }) => {
                 backgroundColor = {colors.darkBackground}
                 containerStyle= {{borderWidth: 0}}
                 />
-            <View style={styles.containerAvatar}>
+            <LinearGradient style={styles.containerAvatar}
+                colors={['#28313b','#485461']}
+                start={{
+                    x: 1,
+                    y: 0
+                }}
+                end={{
+                    x: 1,
+                    y: 1
+                }}
+                >
+                </LinearGradient>
+            {/* <View style={styles.containerAvatar}> */}
             {/* <Svg
                 width="600"
                 height="600"
@@ -74,7 +87,7 @@ const ProfileScreen = ({ navigation, route }) => {
                 >
                 <Path stroke="#000" id="svg_3" d="m76,384.38226l0,-232.38226l475,0l0,136.02864c0,0.18438 -105,-58.09557 -220,35.42413c-115,93.51969 -255,60.9295 -255,60.9295z" opacity="NaN" />
                 </Svg> */}
-            </View>
+            {/* </View> */}
             <Avatar
                     size = 'xlarge'
                     rounded

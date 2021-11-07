@@ -13,9 +13,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle, faFacebookF, faApple } from '@fortawesome/free-brands-svg-icons'
 import { useForm, useFormState } from 'react-hook-form';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import FormInput from '../components/FormInput';
+import { Dimensions } from 'react-native';
 
+
+const screenHeight = Dimensions.get('screen').height;
 
 function LoginScreen({ navigation, route }) {
 
@@ -58,6 +61,7 @@ function LoginScreen({ navigation, route }) {
 
 
   return (
+    <ScrollView >
     <GradientBackground style={styles.background}>
 
       <View style={styles.container}>
@@ -147,6 +151,7 @@ function LoginScreen({ navigation, route }) {
         </SafeAreaView>
       </View>
     </GradientBackground>
+    </ScrollView>
   )
 };
 
@@ -154,10 +159,14 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 50,
+    height:screenHeight
   },
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  background:{
+    backgroundColor: colors.darkBackground,
   },
   logo: {
     height: 200,
@@ -196,14 +205,11 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
     backgroundColor: colors.lightBackground,
-    shadowOpacity: 1,
-    shadowRadius: 3,
     marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: colors.textDisabled,
     borderWidth: 1,
-    shadowRadius: 1,
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center',

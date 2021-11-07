@@ -34,8 +34,8 @@ function LoadingScreen({ navigation, route }) {
 
     }
     catch{
-      alert("test alert");
-      // navigation.pop();
+      alert(t("lang:invalidLogin"));
+      navigation.goBack();
     }
   }
 
