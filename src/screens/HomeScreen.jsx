@@ -6,6 +6,8 @@ import colors from '../assets/colors/colors';
 import { useState } from 'react';
 import {auth} from '../firebase/firebase';
 
+import { useTranslation } from 'react-i18next';
+
 
 
 const getUserData= async ()=>{
@@ -19,7 +21,9 @@ const getUserData= async ()=>{
 }
 
 
+
 const HomeScreen = ({ navigation, route }) => {
+    const { t, i18n } = useTranslation();
     const [userData, setUserData] = useState(null);
     getUserData().then((data)=>{
         setUserData(data);

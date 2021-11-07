@@ -14,5 +14,6 @@ export default {
     noAccount: 'Nu aveti un cont inca?',
     name: 'Prenume si nume',
     errName: 'Acest camp nu ar trebui sa fie gol!',
-    existentAccount: "Aveti deja un cont?"
+    existentAccount: "Aveti deja un cont?",
+    home: 'Acasa'
   }

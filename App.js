@@ -20,7 +20,7 @@ import SplashScreen from './src/screens/SplashScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-
+import { useTranslation } from 'react-i18next';
 import "./src/localization/IMLocalize";
 
 // GoogleSignin.configure({
@@ -32,6 +32,7 @@ const Stack = createStackNavigator();
 
 
 const App = () => {
+  const { t, i18n } = useTranslation();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='SplashScreen'>
@@ -44,6 +45,7 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
+          options={{title: t('lang:home')}}
         >
         </Stack.Screen>
         <Stack.Screen

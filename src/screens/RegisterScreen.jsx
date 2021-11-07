@@ -10,6 +10,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import FormInput from '../components/FormInput';
 import colors from '../assets/colors/colors';
 
+import { useTranslation } from 'react-i18next';
+
 import { registerUserWithEmailAndPassword } from '../firebase/utils/registerWithEmailAndPassword'
 
 const RegisterScreen = ({ navigation, route }) => {
@@ -21,6 +23,8 @@ const RegisterScreen = ({ navigation, route }) => {
     },
     mode: "onBlur"
   });
+
+  const { t, i18n } = useTranslation();
 
   const onSubmit = async (data) => {
     try {

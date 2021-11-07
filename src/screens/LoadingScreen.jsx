@@ -4,13 +4,15 @@ import GradientBackground from '../components/GradientBackground';
 import { Image } from 'react-native-elements';
 import { auth } from '../firebase/firebase';
 
+import { useTranslation } from 'react-i18next';
+
 import { logInWithEmailAndPassword } from '../firebase/utils/logInWithEmailAndPassword'
 import colors from "../assets/colors/colors"
 import { LinearProgress } from 'react-native-elements'
 
 function LoadingScreen({ navigation, route }) {
   
-  
+  const { t, i18n } = useTranslation();
   
   useEffect( async() => {
     await NavigateToHome()
@@ -32,7 +34,7 @@ function LoadingScreen({ navigation, route }) {
 
     }
     catch{
-      alert(t('lang:invalidLogin'));
+      alert("test alert");
       // navigation.pop();
     }
   }

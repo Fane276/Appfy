@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
 import { Image } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 
-import Selector from '../components/LanguageSelector';
-
 import colors from '../assets/colors/colors';
 
 import { googleSignIn } from '../firebase/utils/googleSignIn'
