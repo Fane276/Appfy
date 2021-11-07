@@ -1,10 +1,11 @@
 import React from 'react'
-import { Pressable, Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { Pressable, Text, View, StyleSheet, SafeAreaView, ScrollView, Touchable } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageConsts from '../assets/AppConstants/AsyncStorgeConsts'
 import colors from '../assets/colors/colors';
 import { useState } from 'react';
 import {auth} from '../firebase/firebase';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTranslation } from 'react-i18next';
 
@@ -45,6 +46,11 @@ const HomeScreen = ({ navigation, route }) => {
                     >
                         <Text style={styles.lightButtonText}>{t('lang:logout')}</Text>
                     </Pressable>
+                    <TouchableOpacity style = {styles.lightButton}
+                        onPress={()=> navigation.navigate("ProfileScreen")}
+                    >
+                        <Text style={styles.lightButtonText}>Profile</Text>
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         </ScrollView>

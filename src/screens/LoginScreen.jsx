@@ -19,6 +19,8 @@ import FormInput from '../components/FormInput';
 
 function LoginScreen({ navigation, route }) {
 
+  const { t, i18n } = useTranslation();
+  
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       emailAddress: '',
@@ -54,7 +56,6 @@ function LoginScreen({ navigation, route }) {
     }
   }
 
-  const { t, i18n } = useTranslation();
 
   return (
     <GradientBackground style={styles.background}>

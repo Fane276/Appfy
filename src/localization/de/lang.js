@@ -15,5 +15,10 @@ export default {
     name: 'Vorname und Nachname',
     errName: 'Dieses Feld darf nicht leer sein!',
     existentAccount: 'Haben Sie schon ein Konto?',
-    home: 'Zuhause'
+    home: 'Zuhause',
+    profile: 'Profil',
+    english: 'Englisch',
+    romanian: 'Rumänisch',
+    german: 'Deutsch',
+    changeLanguage: 'Sprache ändern'
   }

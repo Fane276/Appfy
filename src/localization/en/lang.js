@@ -15,5 +15,10 @@ export default {
     name: 'First name and last name',
     errName: 'This field should not be empty',
     existentAccount: "Already have an account?",
-    home: 'Home'
+    home: 'Home',
+    profile: 'Profile',
+    english: 'English',
+    romanian: 'Romanian',
+    german: 'German',
+    changeLanguage: 'Change language'
   }
