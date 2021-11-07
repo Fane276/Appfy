@@ -3,9 +3,9 @@ import { initReactI18next } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import * as RNLocalize from 'react-native-localize';
 
-import en from './localization/en';
-import de from './localization/de';
-import ro from './localization/ro';
+import en from './en';
+import de from './de';
+import ro from './ro';
 
 const LANGUAGES = {
   en,

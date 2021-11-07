@@ -21,7 +21,7 @@ import LoadingScreen from './src/screens/LoadingScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
-import "./src/IMLocalize";
+import "./src/localization/IMLocalize";
 
 // GoogleSignin.configure({
 //   webClientId: '19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com',
