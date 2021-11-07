@@ -1,0 +1,17 @@
+export default {
+    hello: 'Buna',
+    languageSelector: 'Alegeti limba de afisaj',
+    logout: 'Deautentificare',
+    invalidLogin: 'Introduceti date de autentificare valide',
+    invalidEmail: 'Introduceti o adresa e-mail valida',
+    errInvalidEmail: 'adresa email invalida',
+    email: 'Adresa e-mail',
+    password: 'Parola',
+    errPassword: 'Introduceti o parola',
+    register: 'Inregistrare',
+    login: 'Autentificare',
+    forgotPassword: 'Ati uitat parola?',
+    noAccount: 'Nu aveti un cont inca?',
+    name: 'Prenume si nume',
+    errName: 'Acest camp nu ar trebui sa fie gol!',
+  }

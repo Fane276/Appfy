@@ -1,6 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
 import { Image } from 'react-native-elements';
+import { useTranslation } from 'react-i18next';
+
+import Selector from '../components/LanguageSelector';
 
 import colors from '../assets/colors/colors';
 
@@ -53,6 +56,8 @@ function LoginScreen({ navigation, route }) {
     }
   }
 
+  const { t, i18n } = useTranslation();
+
   return (
     <GradientBackground style={styles.background}>
 
@@ -80,7 +85,7 @@ function LoginScreen({ navigation, route }) {
               placeholder="email@address.com"
               label="Email address"
               name="emailAddress"
-              errorMessage="Please provide a valid email address"
+              errorMessage={t('lang:invalidEmail')}
               control={control}
             />
             <FormInput
@@ -95,16 +100,16 @@ function LoginScreen({ navigation, route }) {
               placeholder="Password"
               label="Password"
               name="password"
-              errorMessage="Please enter a password"
+              errorMessage={t('lang:errPassword')}
               control={control}
             />
             <TouchableOpacity
               style={styles.loginButton}
               onPress={handleSubmit(onSubmit)}>
-              <Text style={styles.loginButtonText}>Login</Text>
+              <Text style={styles.loginButtonText}>{t('lang:login')}</Text>
 
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{i18n.changeLanguage("de");}}>
               <Text style={styles.forgotPassword}>
                 Forgot password?
               </Text>
