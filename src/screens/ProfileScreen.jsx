@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Button } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageConsts from '../assets/AppConstants/AsyncStorgeConsts'
 import colors from '../assets/colors/colors';
@@ -7,9 +7,10 @@ import { useState } from 'react';
 import { Avatar, Header } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import { Overlay } from 'react-native-elements';
-import { ListItem } from 'react-native-elements'
+import { ListItem } from 'react-native-elements';
+import { useTranslation } from 'react-i18next'
 
 const getUserData= async ()=>{
     try{
@@ -26,6 +27,7 @@ const ProfileScreen = ({ navigation, route }) => {
     const [userData, setUserData] = useState(null);
     const [selectedLanguage, setSelectedLanguage] = useState();
     const [visible, setVisible] = useState(false);
+    const { t, i18n } = useTranslation();
 
     const toggleOverlay = () => {
       setVisible(!visible);
@@ -33,10 +35,16 @@ const ProfileScreen = ({ navigation, route }) => {
     
     const languageList = [
         {
-            name: 'English'
+            name: t('lang:english'),
+            code: 'en'
         },
         {
-            name: 'Romana'
+            name: t('lang:romanian'),
+            code: 'ro'
+        },
+        {
+            name: t('lang:german'),
+            code: 'de'
         },
     ]
     getUserData().then((data)=>{
@@ -53,7 +61,7 @@ const ProfileScreen = ({ navigation, route }) => {
                     <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
                 </TouchableOpacity>
                 }
-                centerComponent={{ text: userData==null ? "Profile":userData.email, style: { color: '#fff' } }}
+                centerComponent={{ text: t('lang:profile'), style: { color: '#fff' } }}
                 backgroundColor = {colors.darkBackground}
                 containerStyle= {{borderWidth: 0}}
                 />
@@ -77,21 +85,24 @@ const ProfileScreen = ({ navigation, route }) => {
             <View style={styles.infoContainer}>
                 <Text style={styles.userName}>Stefan Cirstea</Text>
                 <Text style={styles.email}>{userData==null ? "Profile":userData.email}</Text>
-                <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-                    {
+                <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
+                {
                     languageList.map((item, i) => (
-                        <ListItem key={i} bottomDivider>
-                            <Text>{item.name}</Text>
-                        </ListItem>
+                        <View>
+                            <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
+                                <Text style={styles.languageButtonText}>{item.name}</Text>
+                            </TouchableOpacity>
+                            <View style={i!=languageList.length - 1?{height:0.5, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
+                        </View>
                     ))
-                    }
+                }
                 </Overlay>
                 
                 <TouchableOpacity
                     style = {styles.profileButton}
                     onPress={toggleOverlay}
                 >
-                    <Text style ={styles.lightButtonText}>Change language</Text>
+                    <Text style ={styles.lightButtonText}>{t('lang:changeLanguage')}</Text>
                     <FontAwesomeIcon icon={faAngleRight} color={colors.textDark}></FontAwesomeIcon>
                 </TouchableOpacity>
             </View>
@@ -104,12 +115,23 @@ const styles = StyleSheet.create({
         backgroundColor: colors.darkBackground,
         flex:1
     },
+    overlayStyle:{
+        backgroundColor: colors.darkBackground
+    },
     infoContainer:{
         paddingTop: 70,
         backgroundColor: colors.lightBackground,
         height: '100%',
         position: 'relative',
         bottom: 0
+    },
+    languageButton:{
+        width: 200,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.darkBackground
+
     },
     containerAvatar: {
         backgroundColor: colors.darkBackground,
@@ -131,7 +153,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: colors.textDark
+        backgroundColor: colors.darkBackground
+    },
+    languageButtonText:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: colors.textLight,
     },
     email:{
         fontSize: 16,

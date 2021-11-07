@@ -14,4 +14,9 @@ export default {
     noAccount: 'Don`t have an account?',
     name: 'First name and last name',
     errName: 'This field should not be empty',
+    profile: 'Profile',
+    english: 'English',
+    romanian: 'Romanian',
+    german: 'German',
+    changeLanguage: 'Change language'
   }

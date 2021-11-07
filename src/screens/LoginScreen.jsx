@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
 import { Image } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 
-import Selector from '../components/LanguageSelector';
-
 import colors from '../assets/colors/colors';
 
 import { googleSignIn } from '../firebase/utils/googleSignIn'
@@ -21,6 +19,8 @@ import FormInput from '../components/FormInput';
 
 function LoginScreen({ navigation, route }) {
 
+  const { t, i18n } = useTranslation();
+  
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       emailAddress: '',
@@ -56,7 +56,6 @@ function LoginScreen({ navigation, route }) {
     }
   }
 
-  const { t, i18n } = useTranslation();
 
   return (
     <GradientBackground style={styles.background}>
