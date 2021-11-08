@@ -8,13 +8,16 @@ import {auth} from '../firebase/firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTranslation } from 'react-i18next';
+import { getUser }from '../firebase/utils/logInWithEmailAndPassword'
 
 
 
 const getUserData= async ()=>{
     try{
-        var userJson = await AsyncStorage.getItem(AsyncStorageConsts.userDataJson);
-        return userJson != null ? JSON.parse(userJson) : null; 
+        var userJson = auth.currentUser;
+        var currentUser = await getUser(userJson.uid);
+        
+        return currentUser;
     }
     catch{
         // de facut ceva aici
@@ -33,7 +36,7 @@ const HomeScreen = ({ navigation, route }) => {
         <ScrollView>
             <SafeAreaView>
                 <View style={styles.container}>
-                    <Text>{userData==null ? "":userData.email}</Text>
+                    <Text>{userData==null ? "":userData.name}</Text>
                     <Pressable
                         style={({ pressed }) => [
                             {

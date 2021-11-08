@@ -12,11 +12,15 @@ import { Overlay } from 'react-native-elements';
 import { ListItem } from 'react-native-elements';
 import { useTranslation } from 'react-i18next'
 import { LinearGradient } from 'expo-linear-gradient';
+import { auth } from '../firebase/firebase';
+import { getUser } from '../firebase/utils/logInWithEmailAndPassword';
 
 const getUserData= async ()=>{
     try{
-        var userJson = await AsyncStorage.getItem(AsyncStorageConsts.userDataJson);
-        return userJson != null ? JSON.parse(userJson) : null; 
+        var userJson = auth.currentUser;
+        var currentUser = await getUser(userJson.uid);
+        // alert(JSON.stringify(currentUser));
+        return currentUser;
     }
     catch{
         // de facut ceva aici
@@ -24,12 +28,17 @@ const getUserData= async ()=>{
 }
 
 
+
 const ProfileScreen = ({ navigation, route }) => {
-    const [userData, setUserData] = useState(null);
+    // const [userData, setUserData] = useState(null);
     const [selectedLanguage, setSelectedLanguage] = useState();
     const [visible, setVisible] = useState(false);
     const { t, i18n } = useTranslation();
 
+    const [userData, setUserData] = useState(null);
+    getUserData().then((data)=>{
+        setUserData(data);
+    });
     const toggleOverlay = () => {
       setVisible(!visible);
     };
@@ -48,9 +57,6 @@ const ProfileScreen = ({ navigation, route }) => {
             code: 'de'
         },
     ]
-    getUserData().then((data)=>{
-        setUserData(data);
-    })
     return (
         <View sytle={styles.container}>
             <Header
@@ -91,13 +97,13 @@ const ProfileScreen = ({ navigation, route }) => {
             <Avatar
                     size = 'xlarge'
                     rounded
-                    title={userData==null ? "P":userData.email[0]}
+                    title={userData==null || userData.email=="" ? "P":userData.emailAddress[0]}
                     source={{ uri: "https://i.imgur.com/Uy5keuJ.jpeg" }}
                     containerStyle = {styles.avatar}
                 />
             <View style={styles.infoContainer}>
-                <Text style={styles.userName}>Stefan Cirstea</Text>
-                <Text style={styles.email}>{userData==null ? "Profile":userData.email}</Text>
+                <Text style={styles.userName}>{userData==null ? "Profile":userData.name}</Text>
+                <Text style={styles.email}>{userData==null ? "Profile":userData.emailAddress}</Text>
                 <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
                 {
                     languageList.map((item, i) => (

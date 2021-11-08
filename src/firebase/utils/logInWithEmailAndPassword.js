@@ -15,10 +15,11 @@ const getUser = async (uid) => {
         .get()
 
     const user = userDoc.data()
+    // alert(JSON.stringify(user));
 
-    await AsyncStorage.setItem(AsyncStorageConsts.userDataJson, JSON.stringify(user))
+    // await AsyncStorage.setItem(AsyncStorageConsts.userDataJson, JSON.stringify(user))
 
     return user
 }
 
-export { logInWithEmailAndPassword }
+export { logInWithEmailAndPassword, getUser}
