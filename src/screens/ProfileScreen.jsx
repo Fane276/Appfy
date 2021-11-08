@@ -124,6 +124,15 @@ const ProfileScreen = ({ navigation, route }) => {
                     <Text style ={styles.lightButtonText}>{t('lang:changeLanguage')}</Text>
                     <FontAwesomeIcon icon={faAngleRight} color={colors.textDark}></FontAwesomeIcon>
                 </TouchableOpacity>
+                
+                <View>
+                    <TouchableOpacity
+                        style = {styles.profileButton}
+                        onPress={() => {navigation.navigate("Appointment")}}   
+                    >
+                        <Text>Make an Appointment</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
