@@ -69,7 +69,7 @@ const RegisterScreen = ({ navigation, route }) => {
               }
               placeholder={t('lang:name')}
               label={t('lang:name')}
-              name="fullName"
+              name="name"
               errorMessage={t('lang:errName')}
               control={control}
             />
