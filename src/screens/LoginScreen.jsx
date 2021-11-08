@@ -14,14 +14,17 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle, faFacebookF, faApple } from '@fortawesome/free-brands-svg-icons'
 import { useForm, useFormState } from 'react-hook-form';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 import FormInput from '../components/FormInput';
 import { Dimensions } from 'react-native';
+import { useState } from 'react';
+import { Overlay } from 'react-native-elements/dist/overlay/Overlay';
 
 
 const screenHeight = Dimensions.get('screen').height;
 
 function LoginScreen({ navigation, route }) {
-
+  const [visible, setVisible] = useState(false);
   const { t, i18n } = useTranslation();
   
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -59,21 +62,55 @@ function LoginScreen({ navigation, route }) {
     }
   }
 
-
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+  const languageList = [
+    {
+        name: t('lang:english'),
+        code: 'en'
+    },
+    {
+        name: t('lang:romanian'),
+        code: 'ro'
+    },
+    {
+        name: t('lang:german'),
+        code: 'de'
+    },
+]
   return (
     <ScrollView >
     <GradientBackground style={styles.background}>
-
+      
       <View style={styles.container}>
         <SafeAreaView>
           <View>
+            <View style={styles.topButtonsContainer}>
+              <TouchableOpacity
+                  style={styles.changeLanguageButton}
+                  onPress={toggleOverlay}>
+                  <FontAwesomeIcon icon={faLanguage} color={colors.textLight} />
+              </TouchableOpacity>
+            </View>
             <View style={styles.logoContainer}>
               <Image
                 source={require("../assets/img/AppfyLogo.png")}
                 style={styles.logo}
               />
             </View>
-
+            <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
+            {
+                languageList.map((item, i) => (
+                    <View>
+                        <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
+                            <Text style={styles.languageButtonText}>{item.name}</Text>
+                        </TouchableOpacity>
+                        <View style={i!=languageList.length - 1?{height:0.5, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
+                    </View>
+                ))
+            }
+            </Overlay>
             <FormInput
               rules={{
                 require: true,
@@ -145,7 +182,7 @@ function LoginScreen({ navigation, route }) {
                 </Text>
               </TouchableOpacity>
             </View>
-
+                
 
           </View>
         </SafeAreaView>
@@ -160,6 +197,41 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 50,
     height:screenHeight
+  },
+  topButtonsContainer:{
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+  changeLanguageButton:{
+    height: 50,
+    width: 50,
+    borderRadius: 30,
+    backgroundColor: colors.darkBackground,
+    borderColor: colors.textDark,
+    borderWidth: 1,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  
+  languageButtonText:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: colors.textLight,
+  },
+  overlayStyle:{
+      backgroundColor: colors.darkBackground,
+      zIndex: 2000
+  },
+  languageButton:{
+      width: 200,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: colors.darkBackground
+
   },
   logoContainer: {
     alignItems: 'center',
