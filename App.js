@@ -18,10 +18,12 @@ import HomeScreen from "./src/screens/HomeScreen";
 import SplashScreen from './src/screens/SplashScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
+import AppointmentScreen from './src/screens/AppointmentScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
 import "./src/localization/IMLocalize";
+
 
 // GoogleSignin.configure({
 //   webClientId: '19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com',
@@ -63,6 +65,10 @@ const App = () => {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name="Appointment"
+          component={AppointmentScreen}
           options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
