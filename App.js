@@ -18,7 +18,8 @@ import HomeScreen from "./src/screens/HomeScreen";
 import SplashScreen from './src/screens/SplashScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
-import AppointmentScreen from './src/screens/AppointmentScreen';
+import SelectDateScreen from './src/screens/SelectDateScreen';
+import SelectHourScreen from './src/screens/SelectHourScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
@@ -67,8 +68,12 @@ const App = () => {
           component={RegisterScreen}
           options={{ headerShown: false }} />
         <Stack.Screen
-          name="Appointment"
-          component={AppointmentScreen}
+          name="SelectDate"
+          component={SelectDateScreen}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name="SelectHour"
+          component={SelectHourScreen}
           options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

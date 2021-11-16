@@ -19,7 +19,6 @@ const getUserData= async ()=>{
     try{
         var userJson = auth.currentUser;
         var currentUser = await getUser(userJson.uid);
-        // alert(JSON.stringify(currentUser));
         return currentUser;
     }
     catch{
@@ -128,7 +127,7 @@ const ProfileScreen = ({ navigation, route }) => {
                 <View>
                     <TouchableOpacity
                         style = {styles.profileButton}
-                        onPress={() => {navigation.navigate("Appointment")}}   
+                        onPress={() => {navigation.navigate("SelectDate")}}   
                     >
                         <Text>Make an Appointment</Text>
                     </TouchableOpacity>
