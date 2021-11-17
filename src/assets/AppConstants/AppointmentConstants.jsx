@@ -1,7 +1,10 @@
 import React from "react";
 
-const AppointmentConstants = () =>{
-  TimeBetweenAppointments: 30;
+const AppointmentConstants = {
+  TimeBetweenAppointments: 30,
+  StartingHour: '09:30',
+  EndHour: '18:00',
+  MaxNumberDays: 20,
 
 }
 

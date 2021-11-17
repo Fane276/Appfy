@@ -9,11 +9,14 @@ import { Header } from 'react-native-elements/dist/header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next';
+import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
+import { getDoneAppointments } from '../services/appointmentService'
 
 const SelectDateScreen = ({ navigation, route }) => {
-    
+    const minDate = moment().format('YYYY-MM-DD');
+    const maxDate = moment().add(AppointmentConstants.MaxNumberDays,'days').format('YYYY-MM-DD');
     const { t } = useTranslation();
-
+    getDoneAppointments();
     return (
         <View>
             <Header
@@ -33,12 +36,13 @@ const SelectDateScreen = ({ navigation, route }) => {
                 items={{
                     '2021-11-13': [{dateTime: moment('"2021-11-13T9:00:00"', 'YYYY-MM-DDTHH:mm:ss'), isFree: true},{dateTime: moment('"2021-11-13T9:30:00"', 'YYYY-MM-DDTHH:mm:ss'), isFree: true},{dateTime: moment('"2021-11-13T10:00:00"', 'YYYY-MM-DDTHH:mm:ss'), isFree: true},{dateTime: moment('"2021-11-13T10:30:00"', 'YYYY-MM-DDTHH:mm:ss'), isFree: true}]
                 }}
-                showClosingKnob={true}
                 theme={{
                     agendaDayNumColor: 'green',
                     agendaTodayColor: 'red',
                     agendaKnobColor: 'blue'
                 }}
+                minDate={minDate}
+                maxDate={maxDate}
                 onDayPress={(dateSelected)=>navigation.navigate('SelectHour',{dateSelected})}
                 markedDates={{
                 '2021-11-11': {selected: true, marked: true},

@@ -1,6 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { auth, firestore } from "../firebase/firebase";
+import AppointmentConstants from "../assets/AppConstants/AppointmentConstants";
 
 const getFreeHours = (startingHour, interval, endHour) => {
   var endHourMoment = moment(endHour,"HH:mm");
@@ -39,5 +40,29 @@ const saveAppointment = async ( appointmentDateTime ) => {
   return { hasError: false };
 }
 
+const getDoneAppointments = async () =>{
+  await firestore
+    .collection('appointments')
+    .get()
+    .then(querySnapshot => {
+      console.warn('Total users: ', JSON.stringify(querySnapshot.size));
+      querySnapshot.forEach(async documentSnapshot => {
+        console.error('User ID: ', JSON.stringify(documentSnapshot.id));
+        await firestore
+          .collection('appointments')
+          .doc(documentSnapshot.id)
+          .collection('hours')
+          .get()
+          .then(querySnapshot2=>{
+            querySnapshot2.forEach(documentSnapshot2=>{
+              console.error('zi:',documentSnapshot.id ,'ora: ', JSON.stringify(documentSnapshot2.id));
+            })
+          })
+      });
+      // querySnapshot.forEach(documentSnapshot => {
+        // console.log('User ID: ', documentSnapshot);
+    });
+}
 
-export {getFreeHours, getUnifyDateTime, saveAppointment};
+
+export {getFreeHours, getUnifyDateTime, saveAppointment, getDoneAppointments};
