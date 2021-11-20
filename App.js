@@ -20,6 +20,7 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
 import SelectDateScreen from './src/screens/SelectDateScreen';
 import SelectHourScreen from './src/screens/SelectHourScreen';
+import MapScreen from './src/screens/MapScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
@@ -74,6 +75,10 @@ const App = () => {
         <Stack.Screen
           name="SelectHour"
           component={SelectHourScreen}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name="MapScreen"
+          component={MapScreen}
           options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

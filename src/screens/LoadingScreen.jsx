@@ -16,7 +16,7 @@ function LoadingScreen({ navigation, route }) {
   
   useEffect( async() => {
     await NavigateToHome()
-  }, [navigation])
+  }, [navigation]);
   
   
   async function NavigateToHome() {

@@ -14,13 +14,72 @@
       },
       "oauth_client": [
         {
+          "client_id": "19862592131-7navdmme5v9qca5j8v03tm6anrkqoaa9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appfy",
+            "certificate_hash": "1f2330d88398e70055e25895f529c83e79b72337"
+          }
+        },
+        {
+          "client_id": "19862592131-ab26nsvpbnfj1luvf5mbv079fdddemvr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appfy",
+            "certificate_hash": "7327a6a0475fc41bbcbd925863c122c4d2eeee8d"
+          }
+        },
+        {
           "client_id": "19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCHlsrlorD9a2CLBrfXk2uEIHPKvOh9iGo"
+          "current_key": "AIzaSyD_1eK2Htlt03nXBDFIcF_lQK7kbRGhB8M"
+        },
+        {
+          "current_key": "AIzaSyC28ZbPy6qZ7oYS46NXSTtNOG5Rlj9odWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19862592131:android:f75cf22412c8d966e299b6",
+        "android_client_info": {
+          "package_name": "com.isoftwarebox.appfy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19862592131-k2nqta7e278dg51j0m6pkqqbbrtfksl2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.isoftwarebox.appfy",
+            "certificate_hash": "1f2330d88398e70055e25895f529c83e79b72337"
+          }
+        },
+        {
+          "client_id": "19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_1eK2Htlt03nXBDFIcF_lQK7kbRGhB8M"
+        },
+        {
+          "current_key": "AIzaSyC28ZbPy6qZ7oYS46NXSTtNOG5Rlj9odWQ"
         }
       ],
       "services": {

@@ -62,7 +62,6 @@ const SelectDateScreen = ({ navigation, route }) => {
           containerStyle= {{borderWidth: 0}}
           />
             <FlatList
-              // keyExtractor={keyExtractor}
               data={freeHours}
               renderItem={renderItem}
             />

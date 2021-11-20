@@ -129,7 +129,16 @@ const ProfileScreen = ({ navigation, route }) => {
                         style = {styles.profileButton}
                         onPress={() => {navigation.navigate("SelectDate")}}   
                     >
-                        <Text>Make an Appointment</Text>
+                        <Text>{t('lang:MakeAppointment')}</Text>
+                    </TouchableOpacity>
+                </View>
+                
+                <View>
+                    <TouchableOpacity
+                        style = {styles.profileButton}
+                        onPress={() => {navigation.navigate("MapScreen")}}   
+                    >
+                        <Text>{t('lang:SeeLocation')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -146,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.darkBackground
     },
     infoContainer:{
-        paddingTop: 70,
+        paddingTop: 80,
         backgroundColor: colors.lightBackground,
         height: '100%',
         position: 'relative',

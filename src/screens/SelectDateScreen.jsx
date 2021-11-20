@@ -1,7 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import { MyCalendar } from '../components/Calendar'
-import { Agenda, Calendar, CalendarList } from 'react-native-calendars'
+import { View } from 'react-native'
 import colors from '../assets/colors/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import moment from 'moment'
@@ -11,6 +9,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next';
 import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
 import { getDoneAppointments } from '../services/appointmentService'
+import { CalendarList } from 'react-native-calendars'
 
 const SelectDateScreen = ({ navigation, route }) => {
     const minDate = moment().format('YYYY-MM-DD');
