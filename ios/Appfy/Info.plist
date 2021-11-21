@@ -53,5 +53,13 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is required for in order to show you directions to the utility.</string>
+	<false/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>App will use your network to grant you access into aplications.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App will use your network to grant you access into aplications.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App will use your network to grant you access into aplications.</string>
+
 </dict>
 </plist>
