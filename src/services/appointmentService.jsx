@@ -32,6 +32,10 @@ const saveAppointment = async ( appointmentDateTime ) => {
   await firestore
   .collection('appointments')
   .doc(dateSelected)
+  .set({ name: 'hours'});
+  await firestore
+  .collection('appointments')
+  .doc(dateSelected)
   .collection('hours')
   .doc(timeSelected)
   .set({ uid, dateFormated})
