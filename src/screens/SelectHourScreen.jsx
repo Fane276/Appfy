@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { ListItem } from 'react-native-elements'
 import { useState } from 'react'
 import { getAvailableHours, getUnifyDateTime, saveAppointment } from '../services/appointmentService'
+import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
 
 
 const saveUserAppointment = async (userSelectedDate, userSelectedTime) => {
@@ -21,9 +22,12 @@ const SelectHourScreen = ({ navigation, route }) => {
   const { dateSelected } = route.params;
   const [availableHours, setAvailableHours] = useState(null)
 
-  useEffect(async () => {
-    const freeHours = await getAvailableHours("10:40", 30, "19:31", dateSelected);
-    setAvailableHours(freeHours)
+  useEffect(() => {
+    const freeH = async () => {
+      const freeHours = await getAvailableHours(AppointmentConstants.StartingHour, AppointmentConstants.TimeBetweenAppointments, AppointmentConstants.EndHour, dateSelected);
+      setAvailableHours(freeHours)
+    }
+    freeH();
   }, [])
 
   const { t } = useTranslation();
@@ -33,6 +37,7 @@ const SelectHourScreen = ({ navigation, route }) => {
     <TouchableOpacity onPress={async () => {
       var isSaved = await saveUserAppointment(dateSelected.dateString, item)
       if (isSaved)
+        alert("Appointment done!");
         navigation.navigate("Home");
     }
     }>

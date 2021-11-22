@@ -9,7 +9,8 @@ const colors = {
   invalidInput: '#db2800',
   lightBackground: '#fcfcfc',
   inputFocusBackground: '#32373d',
-  darkBackground: '#28313b'
+  darkBackground: '#28313b',
+  markedFull: '#c71a0e',
 };
 
 export default colors;

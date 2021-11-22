@@ -129,7 +129,7 @@ const ProfileScreen = ({ navigation, route }) => {
                         style = {styles.profileButton}
                         onPress={() => {navigation.navigate("SelectDate")}}   
                     >
-                        <Text>{t('lang:MakeAppointment')}</Text>
+                        <Text>{t('lang:makeAppointment')}</Text>
                     </TouchableOpacity>
                 </View>
                 
@@ -138,7 +138,7 @@ const ProfileScreen = ({ navigation, route }) => {
                         style = {styles.profileButton}
                         onPress={() => {navigation.navigate("MapScreen")}}   
                     >
-                        <Text>{t('lang:SeeLocation')}</Text>
+                        <Text>{t('lang:location')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

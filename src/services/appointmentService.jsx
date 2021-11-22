@@ -64,7 +64,6 @@ const saveAppointment = async (appointmentDateTime) => {
     .collection('hours')
     .doc(timeSelected)
     .set({ uid, dateFormated })
-  alert(uid)
 
   return { hasError: false };
 }
@@ -91,7 +90,7 @@ const getDoneAppointments = async () => {
     .collection('appointments')
     .get()
     .then((querySnapshot) => {
-      console.warn('Days with at least 1 appointment: ', JSON.stringify(querySnapshot.size));
+      // console.warn('Days with at least 1 appointment: ', JSON.stringify(querySnapshot.size));
       // console.warn('Docs within this collection: ', JSON.stringify(querySnapshot.docs.length));
       // querySnapshot.forEach(async (documentSnapshot) => {
       //   console.error('User ID: ', JSON.stringify(documentSnapshot.id));

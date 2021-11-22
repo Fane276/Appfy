@@ -3,7 +3,7 @@ import React from "react";
 const AppointmentConstants = {
   TimeBetweenAppointments: 30,
   StartingHour: '09:30',
-  EndHour: '18:00',
+  EndHour: '11:00',
   MaxNumberDays: 20,
 
 }

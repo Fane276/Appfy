@@ -14,8 +14,11 @@ function LoadingScreen({ navigation, route }) {
   
   const { t, i18n } = useTranslation();
   
-  useEffect( async() => {
-    await NavigateToHome()
+  useEffect( () => {
+    const fetch = async () =>{
+      await NavigateToHome()
+    }
+    fetch();
   }, [navigation]);
   
   

@@ -19,11 +19,14 @@ const SelectDateScreen = ({ navigation, route }) => {
     const maxDate = moment().add(AppointmentConstants.MaxNumberDays, 'days').format('YYYY-MM-DD');
     const { t } = useTranslation();
 
-    useEffect(async () => {
-        const days = await getDaysWithAtLeastOneAppointment()
-        var markedDatesObject = {}
-        days.forEach(day => markedDatesObject[day] = { marked: true })
-        setMarkedDatesForCalendar(markedDatesObject)
+    useEffect(() => {
+        const getDays = async ()=>{
+            const days = await getDaysWithAtLeastOneAppointment()
+            var markedDatesObject = {}
+            days.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.markedFull})
+            setMarkedDatesForCalendar(markedDatesObject)
+        }
+        getDays();
     }, [])
 
     return (

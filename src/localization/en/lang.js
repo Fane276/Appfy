@@ -20,5 +20,7 @@ export default {
     english: 'English',
     romanian: 'Romanian',
     german: 'German',
-    changeLanguage: 'Change language'
+    changeLanguage: 'Change language',
+    makeAppointment: 'Make appointment',
+    location: 'Location'
   }
