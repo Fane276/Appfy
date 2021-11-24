@@ -60,13 +60,6 @@ const ProfileScreen = ({ navigation, route }) => {
         <View sytle={styles.container}>
             <Header
                 placement="center"
-                leftComponent={ 
-                <TouchableOpacity
-                    onPress={()=>{navigation.goBack()}}
-                >
-                    <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
-                </TouchableOpacity>
-                }
                 centerComponent={{ text: t('lang:profile'), style: { color: '#fff' } }}
                 backgroundColor = {colors.darkBackground}
                 containerStyle= {{borderWidth: 0}}
@@ -110,7 +103,7 @@ const ProfileScreen = ({ navigation, route }) => {
                             <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
                                 <Text style={styles.languageButtonText}>{item.name}</Text>
                             </TouchableOpacity>
-                            <View style={i!=languageList.length - 1?{height:0.5, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
+                            <View style={i<languageList.length-1?{height:0.6, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
                         </View>
                     ))
                 }
@@ -136,9 +129,9 @@ const ProfileScreen = ({ navigation, route }) => {
                 <View>
                     <TouchableOpacity
                         style = {styles.profileButton}
-                        onPress={() => {navigation.navigate("MapScreen")}}   
+                        onPress={async () => {await auth.signOut();}}   
                     >
-                        <Text>{t('lang:location')}</Text>
+                        <Text>{t('lang:logout')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

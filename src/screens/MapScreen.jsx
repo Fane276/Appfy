@@ -116,13 +116,6 @@ const MapScreen = ({navigation}) =>{
       <View>
         <Header
             placement="center"
-            leftComponent={ 
-            <TouchableOpacity
-                onPress={()=>{navigation.goBack()}}
-            >
-                <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
-            </TouchableOpacity>
-            }
             // centerComponent={{ text: t('lang:Location'), style: { color: '#fff' } }}
             centerComponent={{ text: t('lang:Location'), style: { color: '#fff' } }}
             backgroundColor = {colors.darkBackground}

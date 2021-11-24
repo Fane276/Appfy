@@ -22,5 +22,7 @@ export default {
     german: 'German',
     changeLanguage: 'Change language',
     makeAppointment: 'Make appointment',
-    location: 'Location'
+    location: 'Location',
+    home: 'Home',
+    
   }

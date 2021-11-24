@@ -22,5 +22,6 @@ export default {
     german: 'Germană',
     changeLanguage: 'Schimbă limba',
     makeAppointment: 'Programează',
-    location: 'Locație'
+    location: 'Locație',
+    home: 'Acasă',
   }

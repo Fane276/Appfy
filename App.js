@@ -25,7 +25,9 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
 import "./src/localization/IMLocalize";
-
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faUser,faHome, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import colors from './src/assets/colors/colors'
 
 // GoogleSignin.configure({
 //   webClientId: '19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com',
@@ -33,32 +35,78 @@ import "./src/localization/IMLocalize";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const StackAppointment = createStackNavigator();
 
+
+function Appointment(){
+  return(
+    <NavigationContainer>
+      <StackAppointment.Navigator initialRouteName='SelectDate'>
+        
+      </StackAppointment.Navigator>
+    </NavigationContainer>
+  )
+}
+
+
+function Home() {
+  const { t } = useTranslation();
+  return (
+    <Tab.Navigator initialRouteName='HomeScreen'
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
+          let icon;
+
+          if (route.name === 'ProfileScreen') {
+            icon = faUser;
+          } else if (route.name === 'HomeScreen') {
+            icon = faHome;
+          }
+          else{
+            icon = faMapMarkerAlt;
+          }
+          return <FontAwesomeIcon icon={icon} color={color} />;
+        },
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textDisabled,
+      })}
+    >
+      <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{ headerShown: false, title: t('lang:profile')}} />
+      <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: false, title: t('lang:home') }} />
+      <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{ headerShown: false, title: t('lang:location') }} />
+        
+    </Tab.Navigator>
+  );
+}
 
 const App = () => {
-  const { t, i18n } = useTranslation();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='SplashScreen'>
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false}}
         >
         </Stack.Screen>
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
-          options={{title: t('lang:home')}}
+          component={Home}
+          options={{headerShown: false}}
         >
         </Stack.Screen>
         <Stack.Screen
           name="LoadingScreen"
           component={LoadingScreen}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
           options={{ headerShown: false }} />
         <Stack.Screen
           name="Login"
@@ -68,18 +116,14 @@ const App = () => {
           name="Register"
           component={RegisterScreen}
           options={{ headerShown: false }} />
-        <Stack.Screen
-          name="SelectDate"
-          component={SelectDateScreen}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name="SelectHour"
-          component={SelectHourScreen}
-          options={{ headerShown: false }} />
-        <Stack.Screen
-          name="MapScreen"
-          component={MapScreen}
-          options={{ headerShown: false }} />
+          <Stack.Screen
+                name="SelectDate"
+                component={SelectDateScreen}
+                options={{ headerShown: false  }} />
+          <Stack.Screen
+            name="SelectHour"
+            component={SelectHourScreen}
+            options={{ headerShown: false  }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,5 +22,6 @@ export default {
     german: 'Deutsch',
     changeLanguage: 'Sprache ändern',
     makeAppointment: 'Termin machen',
-    location: 'Location'
+    location: 'Location',
+    home: 'Heim'
   }

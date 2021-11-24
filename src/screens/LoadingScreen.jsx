@@ -36,8 +36,9 @@ function LoadingScreen({ navigation, route }) {
       })
 
     }
-    catch{
-      alert(t("lang:invalidLogin"));
+    catch (e){
+      alert(JSON.stringify(e));
+      // alert(t("lang:invalidLogin"));
       navigation.goBack();
     }
   }
