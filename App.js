@@ -21,6 +21,7 @@ import LoadingScreen from './src/screens/LoadingScreen';
 import SelectDateScreen from './src/screens/SelectDateScreen';
 import SelectHourScreen from './src/screens/SelectHourScreen';
 import MapScreen from './src/screens/MapScreen';
+import MainScreen from './src/screens/MainScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
@@ -36,17 +37,6 @@ import colors from './src/assets/colors/colors'
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const StackAppointment = createStackNavigator();
-
-
-function Appointment(){
-  return(
-    <NavigationContainer>
-      <StackAppointment.Navigator initialRouteName='SelectDate'>
-        
-      </StackAppointment.Navigator>
-    </NavigationContainer>
-  )
-}
 
 
 function Home() {
@@ -75,10 +65,10 @@ function Home() {
           name="ProfileScreen"
           component={ProfileScreen}
           options={{ headerShown: false, title: t('lang:profile')}} />
-      <Stack.Screen
+      {/* <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{ headerShown: false, title: t('lang:home') }} />
+          options={{ headerShown: false, title: t('lang:home') }} /> */}
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
@@ -104,6 +94,11 @@ const App = () => {
           options={{headerShown: false}}
         >
         </Stack.Screen>
+        <Stack.Screen
+          name="MainScreen"
+          component={MainScreen}
+          options={{headerShown: false }}
+        />
         <Stack.Screen
           name="LoadingScreen"
           component={LoadingScreen}

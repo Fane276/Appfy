@@ -17,7 +17,7 @@ function SplashScreen({ navigation }) {
         if (user != null) {
           navigation.reset({
             index: 0,
-            routes: [{ name: 'Home' }]
+            routes: [{ name: 'MainScreen' }]
           })
         }
         else {
