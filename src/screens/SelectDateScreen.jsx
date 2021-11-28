@@ -14,7 +14,6 @@ import { getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable } 
 
 const SelectDateScreen = ({ navigation, route }) => {
     const [markedDatesForCalendar, setMarkedDatesForCalendar] = useState(null);
-    const [disabledDatesForCalendar, setDisabledDatesForCalendar] = useState(null);
 
     const minDate = moment().format('YYYY-MM-DD');
     const maxDate = moment().add(AppointmentConstants.MaxNumberDays, 'days').format('YYYY-MM-DD');
@@ -25,10 +24,9 @@ const SelectDateScreen = ({ navigation, route }) => {
             const days = await getDaysWithAtLeastOneAppointment();
             const daysFull = await getDaysWithNoAppointmentsAvailable(AppointmentConstants.StartingHour, AppointmentConstants.TimeBetweenAppointments, AppointmentConstants.EndHour);
             var markedDatesObject = {}
-            days.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.primary})
-            daysFull.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.markedFull, disabled: true, disableTouchEvent: true})
-            setMarkedDatesForCalendar(markedDatesObject)
-            setDisabledDatesForCalendar()
+            days.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.primary});
+            daysFull.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.markedFull, disabled: true, disableTouchEvent: true});
+            setMarkedDatesForCalendar(markedDatesObject);
         }
         getDays();
     }, [])
