@@ -68,7 +68,7 @@ const saveAppointment = async (appointmentDateTime) => {
   return { hasError: false };
 }
 
-const getDaysWithAtLeastOneAppointment = async () => {
+const getDaysWithAtLeastOneAppointment = async (startingHour, interval, endHour) => {
   const days = []
 
   // Print each document 
@@ -78,10 +78,59 @@ const getDaysWithAtLeastOneAppointment = async () => {
 
   colRef.docs.forEach((doc) => {
     const date = doc.id
-    const dateInAnotherFromat = moment(date, 'DD-MM-YYYY').format('YYYY-MM-DD')
-    days.push(dateInAnotherFromat)
+    const dateAsMoment =moment(date, 'DD-MM-YYYY');
+    if(dateAsMoment.isAfter(moment().format())){
+      const dateInAnotherFromat = dateAsMoment.format('YYYY-MM-DD');
+      days.push(dateInAnotherFromat);
+    }
   })
 
+  return days
+}
+
+const getNumberAppointment= (startingHour, interval, endHour)=>{
+  var availableHours = [];
+  var endHourMoment = moment(endHour, "HH:mm");
+  var startingHourMoment = moment(startingHour, "HH:mm");
+
+  availableHours.push(startingHourMoment.format('HH:mm'));
+  
+  var currentVal = moment(startingHour, 'HH:mm');
+  currentVal = currentVal.add(interval, 'minutes');
+
+  while (currentVal.isBefore(endHourMoment)) {
+    availableHours.push(currentVal.format('HH:mm'));
+    currentVal = currentVal.add(interval, 'minutes');
+  }
+
+  return availableHours.length;
+}
+
+const getDaysWithNoAppointmentsAvailable= async (startingHour, interval, endHour) => {
+  const days = []
+
+  // Print each document 
+  var colRef = await firestore
+    .collection('appointments')
+    .get()
+
+  var numberOfAvailableHours = getNumberAppointment(startingHour, interval, endHour);
+
+  for(const doc of colRef.docs ){
+    const date = doc.id
+    const dateAsMoment =moment(date, 'DD-MM-YYYY');
+    if(dateAsMoment.isAfter(moment().format())){
+      const dateInAnotherFromat = dateAsMoment.format('YYYY-MM-DD');
+      var hours = await firestore
+        .collection('appointments')
+        .doc(date)
+        .collection('hours')
+        .get();
+      if(numberOfAvailableHours == hours.docs.length){
+        days.push(dateInAnotherFromat);
+      }
+    }
+  }
   return days
 }
 
@@ -111,4 +160,4 @@ const getDoneAppointments = async () => {
 }
 
 
-export { getAvailableHours, getUnifyDateTime, saveAppointment, getDoneAppointments, getDaysWithAtLeastOneAppointment };
+export { getAvailableHours, getUnifyDateTime, saveAppointment, getDoneAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };

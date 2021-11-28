@@ -10,10 +10,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next';
 import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
-import { getDaysWithAtLeastOneAppointment } from '../services/appointmentService'
+import { getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable } from '../services/appointmentService'
 
 const SelectDateScreen = ({ navigation, route }) => {
-    const [markedDatesForCalendar, setMarkedDatesForCalendar] = useState(null)
+    const [markedDatesForCalendar, setMarkedDatesForCalendar] = useState(null);
+    const [disabledDatesForCalendar, setDisabledDatesForCalendar] = useState(null);
 
     const minDate = moment().format('YYYY-MM-DD');
     const maxDate = moment().add(AppointmentConstants.MaxNumberDays, 'days').format('YYYY-MM-DD');
@@ -21,10 +22,13 @@ const SelectDateScreen = ({ navigation, route }) => {
 
     useEffect(() => {
         const getDays = async ()=>{
-            const days = await getDaysWithAtLeastOneAppointment()
+            const days = await getDaysWithAtLeastOneAppointment();
+            const daysFull = await getDaysWithNoAppointmentsAvailable(AppointmentConstants.StartingHour, AppointmentConstants.TimeBetweenAppointments, AppointmentConstants.EndHour);
             var markedDatesObject = {}
-            days.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.markedFull})
+            days.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.primary})
+            daysFull.forEach(day => markedDatesObject[day] = { marked: true, dotColor: colors.markedFull, disabled: true, disableTouchEvent: true})
             setMarkedDatesForCalendar(markedDatesObject)
+            setDisabledDatesForCalendar()
         }
         getDays();
     }, [])
