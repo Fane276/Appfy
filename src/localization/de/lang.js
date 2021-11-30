@@ -25,5 +25,6 @@ export default {
     appointment: 'Termine',
     location: 'Location',
     home: 'Heim',
-    history: "Programmiergeschichte"
+    history: "Programmiergeschichte",
+    yourAppointments: "Deine Termine"
   }

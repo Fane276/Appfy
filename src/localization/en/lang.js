@@ -25,6 +25,7 @@ export default {
     appointment: 'Appointments',
     location: 'Location',
     home: 'Home',
-    history: "History"
+    history: "History",
+    yourAppointments: "Your appointments"
     
   }

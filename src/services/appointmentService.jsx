@@ -1,4 +1,5 @@
 import moment from "moment";
+import AppointmentConstants from "../assets/AppConstants/AppointmentConstants";
 import { auth, firestore } from "../firebase/firebase";
 
 const getAvailableHours = async (startingHour, interval, endHour, date) => {
@@ -133,31 +134,35 @@ const getDaysWithNoAppointmentsAvailable= async (startingHour, interval, endHour
   }
   return days
 }
+const getAppointmentAvailableDays= ()=>{
+  var dates = []
+  for(var i = 0; i < AppointmentConstants.MaxNumberDays; i++){
+    var date = moment().add(i, 'days').format("DD-MM-YYYY");
+    dates.push(date);
+  }
+  return dates;
+}
 
-const getDoneAppointments = async () => {
-  await firestore
+const getCurrentUserActiveAppointments = async () => {
+  var availableDays = getAppointmentAvailableDays();
+  var appointments = [];
+  for(var i = 0; i<availableDays.length;i++){
+    var hours = await firestore
     .collection('appointments')
-    .get()
-    .then((querySnapshot) => {
-      // console.warn('Days with at least 1 appointment: ', JSON.stringify(querySnapshot.size));
-      // console.warn('Docs within this collection: ', JSON.stringify(querySnapshot.docs.length));
-      // querySnapshot.forEach(async (documentSnapshot) => {
-      //   console.error('User ID: ', JSON.stringify(documentSnapshot.id));
-      //   await firestore
-      //     .collection('appointments')
-      //     .doc(documentSnapshot.id)
-      //     .collection('hours')
-      //     .get()
-      //     .then(querySnapshot2=>{
-      //       querySnapshot2.forEach(documentSnapshot2=>{
-      //         console.error('zi:',documentSnapshot.id ,'ora: ', JSON.stringify(documentSnapshot2.id));
-      //       })
-      //     })
-      // });
-      // querySnapshot.forEach(documentSnapshot => {
-      // console.log('User ID: ', documentSnapshot);
-    });
+    .doc(availableDays[i])
+    .collection('hours')
+    .where("uid",'==',auth.currentUser.uid)
+    .get();
+    for(const doc of hours.docs){
+      var dateFormated = doc.get("dateFormated");
+      var date = moment(dateFormated,"DD-MM-YY hh:mm").format("DD.MM.YY");
+      var hour = moment(dateFormated,"DD-MM-YY hh:mm").format("hh:mm");
+      appointments.push({appointmentDate:date, appointmentHour:hour})
+      
+    }
+  }
+  return appointments;
 }
 
 
-export { getAvailableHours, getUnifyDateTime, saveAppointment, getDoneAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };
+export { getAvailableHours, getUnifyDateTime,getAppointmentAvailableDays, saveAppointment, getCurrentUserActiveAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };

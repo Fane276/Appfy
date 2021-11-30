@@ -1,7 +1,5 @@
 import React from 'react'
-import { Image, Text, View, StyleSheet, SafeAreaView, ScrollView, Touchable } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncStorageConsts from '../assets/AppConstants/AsyncStorgeConsts'
+import { Image, Text, View, StyleSheet } from 'react-native'
 import colors from '../assets/colors/colors';
 import { useState } from 'react';
 import {auth} from '../firebase/firebase';
@@ -12,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import { getUser }from '../firebase/utils/logInWithEmailAndPassword'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendarAlt, faHistory, faMapMarkerAlt, faMarker, faUserAlt, faUserAltSlash } from '@fortawesome/free-solid-svg-icons';
-import { color } from 'react-native-reanimated';
 
 
 
@@ -50,7 +47,7 @@ const MainScreen = ({ navigation, route }) => {
               <FontAwesomeIcon icon={faUserAlt} size={50} color={colors.lightBackground}></FontAwesomeIcon>
               <Text style={styles.buttonText}>{t('lang:profile')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, {marginLeft: 20}]} onPress={()=>{navigation.navigate('SelectDate')}}>
+            <TouchableOpacity style={[styles.button, {marginLeft: 20}]} onPress={()=>{navigation.navigate('Home', {screen: 'AppointmentsScreen'})}}>
               <FontAwesomeIcon icon={faCalendarAlt} size={50} color={colors.lightBackground}></FontAwesomeIcon>
               <Text style={styles.buttonText}>{t('lang:appointment')}</Text>
             </TouchableOpacity>

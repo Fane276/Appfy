@@ -22,6 +22,7 @@ import SelectDateScreen from './src/screens/SelectDateScreen';
 import SelectHourScreen from './src/screens/SelectHourScreen';
 import MapScreen from './src/screens/MapScreen';
 import MainScreen from './src/screens/MainScreen';
+import AppointmentsScreen from './src/screens/AppointmentsScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
@@ -62,13 +63,13 @@ function Home() {
       })}
     >
       <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{ headerShown: false, title: t('lang:profile')}} />
-      {/* <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: false, title: t('lang:home') }} /> */}
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerShown: false, title: t('lang:profile')}} />
+      <Stack.Screen
+        name="AppointmentsScreen"
+        component={AppointmentsScreen}
+        options={{ headerShown: false, title: t('lang:appointment') }} />
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
@@ -86,14 +87,12 @@ const App = () => {
           name="SplashScreen"
           component={SplashScreen}
           options={{ headerShown: false}}
-        >
-        </Stack.Screen>
+        />
         <Stack.Screen
           name="Home"
           component={Home}
           options={{headerShown: false}}
-        >
-        </Stack.Screen>
+        />
         <Stack.Screen
           name="MainScreen"
           component={MainScreen}
@@ -111,14 +110,14 @@ const App = () => {
           name="Register"
           component={RegisterScreen}
           options={{ headerShown: false }} />
-          <Stack.Screen
-                name="SelectDate"
-                component={SelectDateScreen}
-                options={{ headerShown: false  }} />
-          <Stack.Screen
-            name="SelectHour"
-            component={SelectHourScreen}
-            options={{ headerShown: false  }} />
+        <Stack.Screen
+          name="SelectDate"
+          component={SelectDateScreen}
+          options={{ headerShown: false  }} />
+        <Stack.Screen
+          name="SelectHour"
+          component={SelectHourScreen}
+          options={{ headerShown: false  }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
