@@ -1,11 +1,11 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import de from './de';
+import en from './en';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import * as RNLocalize from 'react-native-localize';
-
-import en from './en';
-import de from './de';
 import ro from './ro';
+
+// import * as RNLocalize from 'react-native-localize';
 
 const LANGUAGES = {
   en,
@@ -54,6 +54,7 @@ i18n
     react: {
       useSuspense: false
     },
+    compatibilityJSON: "v3",
     interpolation: {
       escapeValue: false
     }
