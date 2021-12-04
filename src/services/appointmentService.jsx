@@ -155,7 +155,7 @@ const getCurrentUserActiveAppointments = async () => {
     .get();
     for(const doc of hours.docs){
       var dateFormated = doc.get("dateFormated");
-      var date = moment(dateFormated,"DD-MM-YY hh:mm").format("DD.MM.YY");
+      var date = moment(dateFormated,"DD-MM-YY hh:mm").format("DD.MM.YYYY");
       var hour = moment(dateFormated,"DD-MM-YY hh:mm").format("hh:mm");
       appointments.push({appointmentDate:date, appointmentHour:hour})
       

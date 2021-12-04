@@ -26,5 +26,6 @@ export default {
     location: 'Locație',
     home: 'Acasă',
     history: "Istoric",
-    yourAppointments: "Programările tale"
+    yourAppointments: "Programările tale",
+    youHaveNoAppointments: "Nu aveți nicio programare"
   }

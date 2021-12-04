@@ -11,6 +11,7 @@ const colors = {
   inputFocusBackground: '#32373d',
   darkBackground: '#28313b',
   markedFull: '#c71a0e',
+  deleteColor: '#96150c'
 };
 
 export default colors;

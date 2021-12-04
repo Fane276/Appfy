@@ -26,6 +26,7 @@ export default {
     location: 'Location',
     home: 'Home',
     history: "History",
-    yourAppointments: "Your appointments"
+    yourAppointments: "Your appointments",
+    youHaveNoAppointments: "You have no appointment"
     
   }

@@ -30,6 +30,7 @@ import "./src/localization/IMLocalize";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser,faHome, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import colors from './src/assets/colors/colors'
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 // GoogleSignin.configure({
 //   webClientId: '19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com',
@@ -43,15 +44,15 @@ const StackAppointment = createStackNavigator();
 function Home() {
   const { t } = useTranslation();
   return (
-    <Tab.Navigator initialRouteName='HomeScreen'
+    <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
           let icon;
 
           if (route.name === 'ProfileScreen') {
             icon = faUser;
-          } else if (route.name === 'HomeScreen') {
-            icon = faHome;
+          } else if (route.name === 'AppointmentsScreen') {
+            icon = faCalendarAlt;
           }
           else{
             icon = faMapMarkerAlt;

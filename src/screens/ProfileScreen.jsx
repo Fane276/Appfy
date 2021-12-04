@@ -60,6 +60,13 @@ const ProfileScreen = ({ navigation, route }) => {
         <View sytle={styles.container}>
             <Header
                 placement="center"
+                leftComponent={
+                    <TouchableOpacity
+                    onPress={() => { navigation.navigate("MainScreen")}}
+                    >
+                    <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
+                    </TouchableOpacity>
+                }
                 centerComponent={{ text: t('lang:profile'), style: { color: '#fff' } }}
                 backgroundColor = {colors.darkBackground}
                 containerStyle= {{borderWidth: 0}}
@@ -76,6 +83,18 @@ const ProfileScreen = ({ navigation, route }) => {
                 }}
                 >
                 </LinearGradient>
+            <View style={styles.avatarInfoContainer}>
+                <View>
+
+                    <Avatar
+                            size = 'xlarge'
+                            rounded
+                            title={userData==null || userData.email=="" ? "P":userData.emailAddress[0]}
+                            source={require("../assets/img/appointments.png")}
+                            containerStyle = {styles.avatar}
+                            />
+                </View>
+            
             {/* <View style={styles.containerAvatar}> */}
             {/* <Svg
                 width="600"
@@ -86,54 +105,48 @@ const ProfileScreen = ({ navigation, route }) => {
                 <Path stroke="#000" id="svg_3" d="m76,384.38226l0,-232.38226l475,0l0,136.02864c0,0.18438 -105,-58.09557 -220,35.42413c-115,93.51969 -255,60.9295 -255,60.9295z" opacity="NaN" />
                 </Svg> */}
             {/* </View> */}
-            <Avatar
-                    size = 'xlarge'
-                    rounded
-                    title={userData==null || userData.email=="" ? "P":userData.emailAddress[0]}
-                    source={{ uri: "https://i.imgur.com/Uy5keuJ.jpeg" }}
-                    containerStyle = {styles.avatar}
-                />
-            <View style={styles.infoContainer}>
-                <Text style={styles.userName}>{userData==null ? "Profile":userData.name}</Text>
-                <Text style={styles.email}>{userData==null ? "Profile":userData.emailAddress}</Text>
-                <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
-                {
-                    languageList.map((item, i) => (
-                        <View>
-                            <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
-                                <Text style={styles.languageButtonText}>{item.name}</Text>
-                            </TouchableOpacity>
-                            <View style={i<languageList.length-1?{height:0.6, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
-                        </View>
-                    ))
-                }
-                </Overlay>
-                
+        <View style={styles.infoContainer}>
+            <Text style={styles.userName}>{userData==null ? "Profile":userData.name}</Text>
+            <Text style={styles.email}>{userData==null ? "Profile":userData.emailAddress}</Text>
+            <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
+            {
+                languageList.map((item, i) => (
+                    <View>
+                        <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
+                            <Text style={styles.languageButtonText}>{item.name}</Text>
+                        </TouchableOpacity>
+                        <View style={i<languageList.length-1?{height:0.6, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
+                    </View>
+                ))
+            }
+            </Overlay>
+            
+            <TouchableOpacity
+                style = {styles.profileButton}
+                onPress={toggleOverlay}
+            >
+                <Text style ={styles.lightButtonText}>{t('lang:changeLanguage')}</Text>
+                <FontAwesomeIcon icon={faAngleRight} color={colors.textDark}></FontAwesomeIcon>
+            </TouchableOpacity>
+            
+            <View>
                 <TouchableOpacity
                     style = {styles.profileButton}
-                    onPress={toggleOverlay}
+                    onPress={() => {navigation.navigate("SelectDate")}}   
                 >
-                    <Text style ={styles.lightButtonText}>{t('lang:changeLanguage')}</Text>
-                    <FontAwesomeIcon icon={faAngleRight} color={colors.textDark}></FontAwesomeIcon>
+                    <Text>{t('lang:makeAppointment')}</Text>
                 </TouchableOpacity>
-                
-                <View>
-                    <TouchableOpacity
-                        style = {styles.profileButton}
-                        onPress={() => {navigation.navigate("SelectDate")}}   
-                    >
-                        <Text>{t('lang:makeAppointment')}</Text>
-                    </TouchableOpacity>
-                </View>
-                
-                <View>
-                    <TouchableOpacity
-                        style = {styles.profileButton}
-                        onPress={async () => {await auth.signOut();}}   
-                    >
-                        <Text>{t('lang:logout')}</Text>
-                    </TouchableOpacity>
-                </View>
+            </View>
+            
+            <View>
+                <TouchableOpacity
+                    style = {styles.profileButton}
+                    onPress={async () => {await auth.signOut();}}   
+                >
+                    <Text>{t('lang:logout')}</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
             </View>
         </View>
     );
@@ -141,18 +154,16 @@ const ProfileScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: colors.darkBackground,
-        flex:1
+        backgroundColor: colors.primary,
     },
     overlayStyle:{
         backgroundColor: colors.darkBackground
     },
     infoContainer:{
-        paddingTop: 80,
         backgroundColor: colors.lightBackground,
-        height: '100%',
+        height: '80%',
         position: 'relative',
-        bottom: 0
+        top: -40
     },
     languageButton:{
         width: 200,
@@ -164,7 +175,7 @@ const styles = StyleSheet.create({
     },
     containerAvatar: {
         backgroundColor: colors.darkBackground,
-        height: 150
+        height: '20%'
     },
     chevronDown: {
         display: "none",
@@ -198,11 +209,14 @@ const styles = StyleSheet.create({
     },
     avatar:{
         alignSelf: 'center',
+        backgroundColor: colors.darkBackground,
         borderColor: colors.lightBackground,
         borderWidth: 2,
-        position:'absolute',
-        zIndex: 200,
-        top: 150
+        position: 'relative',
+        top: -80
+    },
+    avatarInfoContainer:{
+        backgroundColor: colors.lightBackground
     },
     picker:{
         marginHorizontal: 100,
