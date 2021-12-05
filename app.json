@@ -5,7 +5,7 @@
     "name": "Appfy",
     "slug": "appfy",
     "android": {
-      "package": "com.appfy"
+      "package": "com.isoftwarebox.appfy"
     }
   }
 }

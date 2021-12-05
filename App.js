@@ -23,7 +23,7 @@ import SelectHourScreen from './src/screens/SelectHourScreen';
 import MapScreen from './src/screens/MapScreen';
 import MainScreen from './src/screens/MainScreen';
 import AppointmentsScreen from './src/screens/AppointmentsScreen';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+// import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { useTranslation } from 'react-i18next';
 import "./src/localization/IMLocalize";

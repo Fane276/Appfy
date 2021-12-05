@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import colors from '../assets/colors/colors';
 
-import { googleSignIn } from '../firebase/utils/googleSignIn'
+// import { googleSignIn } from '../firebase/utils/googleSignIn'
 
 import GradientBackground from '../components/GradientBackground';
 
@@ -53,14 +53,14 @@ function LoginScreen({ navigation, route }) {
     control
   });
 
-  const onGoogleButtonPress = async () => {
-    try {
-      await googleSignIn();
-    }
-    catch (error) {
-      Alert.alert(error.message)
-    }
-  }
+  // const onGoogleButtonPress = async () => {
+  //   try {
+  //     await googleSignIn();
+  //   }
+  //   catch (error) {
+  //     Alert.alert(error.message)
+  //   }
+  // }
 
   const toggleOverlay = () => {
     setVisible(!visible);
