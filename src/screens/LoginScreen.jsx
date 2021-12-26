@@ -158,7 +158,8 @@ function LoginScreen({ navigation, route }) {
             <View style={styles.registerWraper}>
               <TouchableOpacity
                 style={styles.socialButton}
-                onPress={onGoogleButtonPress}>
+                // onPress={onGoogleButtonPress}
+                >
                 <FontAwesomeIcon icon={faGoogle} color={"#4267B2"} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.socialButton}>
