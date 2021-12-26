@@ -1,17 +1,17 @@
-import React from 'react'
-import { Image, Text, View, StyleSheet } from 'react-native'
-import colors from '../assets/colors/colors';
+import React, { useEffect } from 'react'
 import { useState } from 'react';
-import {auth} from '../firebase/firebase';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import GradientBackground from '../components/GradientBackground';
-
 import { useTranslation } from 'react-i18next';
-import { getUser }from '../firebase/utils/logInWithEmailAndPassword'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { faCalendarAlt, faCog, faHistory, faMapMarkerAlt, faMarker, faUserAlt, faUserAltSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCalendarAlt, faHistory, faMapMarkerAlt, faMarker, faUserAlt, faUserAltSlash } from '@fortawesome/free-solid-svg-icons';
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppUserRolesConstants from '../assets/AppConstants/AppUserRolesConstants';
+import AsyncStorageConsts from '../assets/AppConstants/AsyncStorgeConsts';
+import colors from '../assets/colors/colors';
+import GradientBackground from '../components/GradientBackground';
+import {auth} from '../firebase/firebase';
+import { getUser }from '../firebase/utils/logInWithEmailAndPassword'
 
 const getUserData= async ()=>{
     try{
@@ -30,9 +30,19 @@ const getUserData= async ()=>{
 const MainScreen = ({ navigation, route }) => {
     const { t, i18n } = useTranslation();
     const [userData, setUserData] = useState(null);
+    const [userRole, setUserRole] = useState(null);
     getUserData().then((data)=>{
         setUserData(data);
     })
+
+    useEffect(() => {
+      const getUserPermission = async () =>{
+        var role = await AsyncStorage.getItem(AsyncStorageConsts.userRole);
+        setUserRole(role)
+        alert(userRole);
+      }
+      getUserPermission();
+    }, [])
     return (
       <GradientBackground >
         <View style={styles.logo}>
@@ -53,10 +63,18 @@ const MainScreen = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
           <View style={[styles.buttonsRow, {marginTop: 20}]}>
-            <TouchableOpacity style={styles.button}>
-              <FontAwesomeIcon icon={faHistory} size={50} color={colors.lightBackground}></FontAwesomeIcon>
-              <Text style={styles.buttonText}>{t('lang:history')}</Text>
-            </TouchableOpacity>
+            { userRole != AppUserRolesConstants.administrator &&
+              <TouchableOpacity style={styles.button}>
+                <FontAwesomeIcon icon={faHistory} size={50} color={colors.lightBackground}></FontAwesomeIcon>
+                <Text style={styles.buttonText}>{t('lang:history')}</Text>
+              </TouchableOpacity>
+            }
+            { userRole == AppUserRolesConstants.administrator &&
+              <TouchableOpacity style={styles.button}>
+                <FontAwesomeIcon icon={faCog} size={50} color={colors.lightBackground}></FontAwesomeIcon>
+                <Text style={styles.buttonText}>{t('lang:settings')}</Text>
+              </TouchableOpacity>
+            }
             <TouchableOpacity style={[styles.button, {marginLeft: 20}]} onPress={()=>{navigation.navigate('Home', { screen: 'MapScreen' })}}>
               <FontAwesomeIcon icon={faMapMarkerAlt} size={50} color={colors.lightBackground}></FontAwesomeIcon>
               <Text style={styles.buttonText}>{t('lang:location')}</Text>

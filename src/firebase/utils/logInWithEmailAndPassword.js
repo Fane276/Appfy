@@ -1,7 +1,6 @@
-import { auth, firestore } from '../firebase'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageConsts from '../../assets/AppConstants/AsyncStorgeConsts'
-
+import { auth, firestore } from '../firebase'
 
 const logInWithEmailAndPassword = async (email, password) => {
     const signInResponse = await auth.signInWithEmailAndPassword(email, password)
@@ -17,7 +16,7 @@ const getUser = async (uid) => {
     const user = userDoc.data()
     // alert(JSON.stringify(user));
 
-    // await AsyncStorage.setItem(AsyncStorageConsts.userDataJson, JSON.stringify(user))
+    await AsyncStorage.setItem(AsyncStorageConsts.userRole, user.role);
 
     return user
 }
