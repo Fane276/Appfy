@@ -39,7 +39,6 @@ const MainScreen = ({ navigation, route }) => {
       const getUserPermission = async () =>{
         var role = await AsyncStorage.getItem(AsyncStorageConsts.userRole);
         setUserRole(role)
-        alert(userRole);
       }
       getUserPermission();
     }, [])
@@ -57,7 +56,14 @@ const MainScreen = ({ navigation, route }) => {
               <FontAwesomeIcon icon={faUserAlt} size={50} color={colors.lightBackground}></FontAwesomeIcon>
               <Text style={styles.buttonText}>{t('lang:profile')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, {marginLeft: 20}]} onPress={()=>{navigation.navigate('Home', {screen: 'AppointmentsScreen'})}}>
+            <TouchableOpacity style={[styles.button, {marginLeft: 20}]} onPress={()=>{
+                if(userRole == AppUserRolesConstants.administrator){
+                  navigation.navigate('Home', {screen: 'AdminAppointmentsScreen'})
+                }
+                else{
+                  navigation.navigate('Home', {screen: 'AppointmentsScreen'})
+                }
+              }}>
               <FontAwesomeIcon icon={faCalendarAlt} size={50} color={colors.lightBackground}></FontAwesomeIcon>
               <Text style={styles.buttonText}>{t('lang:appointment')}</Text>
             </TouchableOpacity>

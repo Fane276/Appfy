@@ -6,13 +6,14 @@ import { FAB, ListItem } from 'react-native-elements'
 import { Header } from 'react-native-elements/dist/header/Header'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {CircleSnail as CircleProgress} from 'react-native-progress';
-import { faAngleLeft, faCalendarAlt, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faCalendarAlt, faPencilAlt, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useFocusEffect } from '@react-navigation/native';
 import colors from '../assets/colors/colors'
+import { getUsersActiveAppointments } from '../services/appointmentAdminService';
 import { getCurrentUserActiveAppointments } from '../services/appointmentService'
 
-const AppointmentsScreen = ({ navigation, route }) => {
+const AdminAppointmentsScreen = ({ navigation, route }) => {
   const [appointmentsList, setAppointmentsList] = useState([]);
   const [isBusy, setBusy] = useState(true);
   
@@ -20,24 +21,23 @@ const AppointmentsScreen = ({ navigation, route }) => {
   useEffect(() => {
     const freeH = async () => {
       setBusy(true);
-      var appointments = await getCurrentUserActiveAppointments();
+      var appointments = await getUsersActiveAppointments();
       setAppointmentsList(appointments);
       setBusy(false)
     }
     freeH()
   }, []);
 
-
-useFocusEffect(
-  React.useCallback(()=>{
+  useFocusEffect(
+    React.useCallback(()=>{
     const freeH = async () => {
       setBusy(true);
-      var appointments = await getCurrentUserActiveAppointments();
+      var appointments = await getUsersActiveAppointments();
       setAppointmentsList(appointments);
       setBusy(false)
     }
-    freeH();
-},[]));
+    freeH()
+  },[]));
 
   const { t } = useTranslation();
   // keyExtractor = (item, index) => index.toString();
@@ -76,10 +76,10 @@ useFocusEffect(
       <ListItem bottomDivider>
         <Image style={styles.appointmentImage} source={require('../assets/img/appointments.png')} />
         <ListItem.Content>
-          <ListItem.Title style={{width:"100%",textAlign:'center'}}>{item.appointmentHour}</ListItem.Title>
-          <ListItem.Subtitle style={{width:"100%",textAlign:'center'}}>{item.appointmentDate}</ListItem.Subtitle>
+          <ListItem.Title style={{width:"100%",textAlign:'center'}}>{item.userName}</ListItem.Title>
+          <ListItem.Subtitle style={{width:"100%",textAlign:'center'}}>{item.appointmentDate} {item.appointmentHour}</ListItem.Subtitle>
         </ListItem.Content>
-        <FontAwesomeIcon icon={faTrash} color={colors.deleteColor} />
+        <FontAwesomeIcon icon={faPencilAlt} color={colors.primary} />
       </ListItem>
     // </TouchableOpacity>
   )
@@ -94,14 +94,7 @@ useFocusEffect(
               <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
             </TouchableOpacity>
           }
-          centerComponent={{ text: t('lang:yourAppointments'), style: { color: '#fff' } }}
-          rightComponent={
-            <TouchableOpacity
-              onPress={() => { navigation.navigate("SelectDate")}}
-            >
-              <FontAwesomeIcon icon={faPlus} color={colors.lightBackground} />
-            </TouchableOpacity>
-          }
+          centerComponent={{ text: t('lang:appointments'), style: { color: '#fff' } }}
           backgroundColor={colors.darkBackground}
           containerStyle={{ borderWidth: 0 }}
         />
@@ -143,4 +136,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default AppointmentsScreen
+export default AdminAppointmentsScreen

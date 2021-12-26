@@ -5,32 +5,43 @@
  * @format
  * @flow strict-local
  */
-import React, { useState } from 'react';
-import 'react-native-gesture-handler';
 
+import 'react-native-gesture-handler';
+import "./src/localization/IMLocalize";
+
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+import { faHome, faMapMarkerAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import LoginScreen from "./src/screens/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
+import AppUserRolesConstants from './src/assets/AppConstants/AppUserRolesConstants';
+import AsyncStorageConsts from './src/assets/AppConstants/AsyncStorgeConsts';
+import colors from './src/assets/colors/colors'
+import AdminAppointmentsScreen from './src/screens/AdminAppointmentsScreen';
+import AppointmentsScreen from './src/screens/AppointmentsScreen';
 import HomeScreen from "./src/screens/HomeScreen";
-import SplashScreen from './src/screens/SplashScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
+import LoginScreen from "./src/screens/LoginScreen";
+import MainScreen from './src/screens/MainScreen';
+import MapScreen from './src/screens/MapScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import RegisterScreen from "./src/screens/RegisterScreen";
 import SelectDateScreen from './src/screens/SelectDateScreen';
 import SelectHourScreen from './src/screens/SelectHourScreen';
-import MapScreen from './src/screens/MapScreen';
-import MainScreen from './src/screens/MainScreen';
-import AppointmentsScreen from './src/screens/AppointmentsScreen';
+import SplashScreen from './src/screens/SplashScreen';
+
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-import { useTranslation } from 'react-i18next';
-import "./src/localization/IMLocalize";
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser,faHome, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import colors from './src/assets/colors/colors'
-import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+
+
+
+
+
+
 
 // GoogleSignin.configure({
 //   webClientId: '19862592131-bqpjf9l6sf1bs5mpemacp1e52qgieaej.apps.googleusercontent.com',
@@ -43,6 +54,16 @@ const StackAppointment = createStackNavigator();
 
 function Home() {
   const { t } = useTranslation();
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const getUserPermission = async () =>{
+      var role = await AsyncStorage.getItem(AsyncStorageConsts.userRole);
+      setUserRole(role)
+    }
+    getUserPermission();
+  }, [])
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -52,6 +73,9 @@ function Home() {
           if (route.name === 'ProfileScreen') {
             icon = faUser;
           } else if (route.name === 'AppointmentsScreen') {
+            icon = faCalendarAlt;
+          }
+          else if (route.name === 'AdminAppointmentsScreen') {
             icon = faCalendarAlt;
           }
           else{
@@ -67,10 +91,18 @@ function Home() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{ headerShown: false, title: t('lang:profile')}} />
-      <Stack.Screen
-        name="AppointmentsScreen"
-        component={AppointmentsScreen}
-        options={{ headerShown: false, title: t('lang:appointment') }} />
+        { userRole != AppUserRolesConstants.administrator && 
+          <Stack.Screen
+            name="AppointmentsScreen"
+            component={AppointmentsScreen}
+            options={{ headerShown: false, title: t('lang:appointment') }} />
+        }
+        { userRole == AppUserRolesConstants.administrator && 
+          <Stack.Screen
+          name="AdminAppointmentsScreen"
+          component={AdminAppointmentsScreen}
+          options={{ headerShown: false, title: t('lang:appointments') }} />
+        }
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
@@ -81,6 +113,7 @@ function Home() {
 }
 
 const App = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='SplashScreen'>

@@ -1,6 +1,7 @@
 import moment from "moment";
 import AppointmentConstants from "../assets/AppConstants/AppointmentConstants";
 import { auth, firestore } from "../firebase/firebase";
+import { getUser } from "../firebase/utils/logInWithEmailAndPassword";
 
 const getAvailableHours = async (startingHour, interval, endHour, date) => {
   const notAvailableHours = await getReservedHoursOnDate(date.dateString)
@@ -52,6 +53,7 @@ const saveAppointment = async (appointmentDateTime) => {
     return { hasError: true };
 
   const uid = auth.currentUser.uid;
+  const currentUser = await getUser(uid);
   const dateFormated = appointmentDateTime.format('DD-MM-YYYY HH:mm');
   const dateSelected = appointmentDateTime.format('DD-MM-YYYY');
   const timeSelected = appointmentDateTime.format('HH:mm');
@@ -64,7 +66,7 @@ const saveAppointment = async (appointmentDateTime) => {
     .doc(dateSelected)
     .collection('hours')
     .doc(timeSelected)
-    .set({ uid, dateFormated })
+    .set({ uid, dateFormated, userName:currentUser.name})
 
   return { hasError: false };
 }
