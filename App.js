@@ -34,6 +34,7 @@ import SelectDateScreen from './src/screens/SelectDateScreen';
 import SelectHourScreen from './src/screens/SelectHourScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import AppointmentsHistoryScreen from './src/screens/AppointmentsHistoryScreen';
+import AdminSettingsScreen from './src/screens/AdminSettingsScreen';
 
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
@@ -127,6 +128,10 @@ const App = () => {
         <Stack.Screen
             name="AppointmentsHistoryScreen"
             component={AppointmentsHistoryScreen}
+            options={{ headerShown: false }} />
+        <Stack.Screen
+            name="AdminSettingsScreen"
+            component={AdminSettingsScreen}
             options={{ headerShown: false }} />
         <Stack.Screen
           name="Home"

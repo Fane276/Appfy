@@ -76,7 +76,7 @@ const MainScreen = ({ navigation, route }) => {
               </TouchableOpacity>
             }
             { userRole == AppUserRolesConstants.administrator &&
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AdminSettingsScreen')}}>
                 <FontAwesomeIcon icon={faCog} size={50} color={colors.lightBackground}></FontAwesomeIcon>
                 <Text style={styles.buttonText}>{t('lang:settings')}</Text>
               </TouchableOpacity>
