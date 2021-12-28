@@ -70,7 +70,7 @@ const MainScreen = ({ navigation, route }) => {
           </View>
           <View style={[styles.buttonsRow, {marginTop: 20}]}>
             { userRole != AppUserRolesConstants.administrator &&
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AppointmentsHistoryScreen')}}>
                 <FontAwesomeIcon icon={faHistory} size={50} color={colors.lightBackground}></FontAwesomeIcon>
                 <Text style={styles.buttonText}>{t('lang:history')}</Text>
               </TouchableOpacity>

@@ -144,6 +144,14 @@ const getAppointmentAvailableDays= ()=>{
   }
   return dates;
 }
+const getDaysBeforeToday= (numberDays)=>{
+  var dates = []
+  for(var i = 0; i < numberDays; i++){
+    var date = moment().subtract(i, 'days').format("DD-MM-YYYY");
+    dates.push(date);
+  }
+  return dates;
+}
 
 const getCurrentUserActiveAppointments = async () => {
   var availableDays = getAppointmentAvailableDays();
@@ -166,5 +174,26 @@ const getCurrentUserActiveAppointments = async () => {
   return appointments;
 }
 
+const getCurrentUserAppointmentsHistory = async () => {
+  var availableDays = getDaysBeforeToday(90);
+  var appointments = [];
+  for(var i = 0; i<availableDays.length;i++){
+    var hours = await firestore
+    .collection('appointments')
+    .doc(availableDays[i])
+    .collection('hours')
+    .where("uid",'==',auth.currentUser.uid)
+    .get();
+    for(const doc of hours.docs){
+      var dateFormated = doc.get("dateFormated");
+      var date = moment(dateFormated,"DD-MM-YY hh:mm").format("DD.MM.YYYY");
+      var hour = moment(dateFormated,"DD-MM-YY hh:mm").format("hh:mm");
+      appointments.push({appointmentDate:date, appointmentHour:hour})
+      
+    }
+  }
+  return appointments;
+}
 
-export { getAvailableHours, getUnifyDateTime,getAppointmentAvailableDays, saveAppointment, getCurrentUserActiveAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };
+
+export { getAvailableHours, getUnifyDateTime,getCurrentUserAppointmentsHistory,getAppointmentAvailableDays, saveAppointment, getCurrentUserActiveAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };

@@ -33,6 +33,7 @@ import RegisterScreen from "./src/screens/RegisterScreen";
 import SelectDateScreen from './src/screens/SelectDateScreen';
 import SelectHourScreen from './src/screens/SelectHourScreen';
 import SplashScreen from './src/screens/SplashScreen';
+import AppointmentsHistoryScreen from './src/screens/AppointmentsHistoryScreen';
 
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
@@ -87,26 +88,27 @@ function Home() {
         tabBarInactiveTintColor: colors.textDisabled,
       })}
     >
-      <Stack.Screen
+      <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
         options={{ headerShown: false, title: t('lang:profile')}} />
         { userRole != AppUserRolesConstants.administrator && 
-          <Stack.Screen
+          <Tab.Screen
             name="AppointmentsScreen"
             component={AppointmentsScreen}
             options={{ headerShown: false, title: t('lang:appointment') }} />
         }
         { userRole == AppUserRolesConstants.administrator && 
-          <Stack.Screen
+          <Tab.Screen
           name="AdminAppointmentsScreen"
           component={AdminAppointmentsScreen}
           options={{ headerShown: false, title: t('lang:appointments') }} />
         }
-      <Stack.Screen
+      <Tab.Screen
         name="MapScreen"
         component={MapScreen}
         options={{ headerShown: false, title: t('lang:location') }} />
+        
         
     </Tab.Navigator>
   );
@@ -122,6 +124,10 @@ const App = () => {
           component={SplashScreen}
           options={{ headerShown: false}}
         />
+        <Stack.Screen
+            name="AppointmentsHistoryScreen"
+            component={AppointmentsHistoryScreen}
+            options={{ headerShown: false }} />
         <Stack.Screen
           name="Home"
           component={Home}
