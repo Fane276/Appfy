@@ -123,6 +123,7 @@ function LoginScreen({ navigation, route }) {
               icon={
                 <FontAwesomeIcon icon={faEnvelope} color={colors.lightBackground} />
               }
+              keyboardType={'email-address'}
               placeholder="email@address.com"
               label={t('lang:email')}
               name="emailAddress"
