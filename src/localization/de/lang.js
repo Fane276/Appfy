@@ -39,4 +39,5 @@ export default {
     save: "Speichern",
     appointmentDeleted: "Termin gelöscht",
     anErrorOccurred:"Ein Fehler ist aufgetreten",
+    selectDateTitle:"Wähle das Datum"
   }

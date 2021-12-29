@@ -39,4 +39,5 @@ export default {
     save: "Save",
     appointmentDeleted:"Appointment deleted",
     anErrorOccurred:"An error occurred",
+    selectDateTitle:"Select date"
   }

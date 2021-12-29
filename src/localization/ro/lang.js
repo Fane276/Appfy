@@ -39,4 +39,5 @@ export default {
     save: "Salvează",
     appointmentDeleted:"Programarea a fost ștearsă",
     anErrorOccurred:"A intervenit o eroare",
+    selectDateTitle:"Selectează dată"
   }
