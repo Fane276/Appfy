@@ -36,5 +36,6 @@ export default {
     infoNrDaysAppointment: "No. of days starting today for which customers can schedule",
     infoTimeBetweenAppointments: "No. of minutes bettween two appointments",
     settings: "Settings",
-    save: "Save"
+    save: "Save",
+    appointmentDeleted:"Appointment deleted"
   }

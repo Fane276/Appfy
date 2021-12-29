@@ -165,8 +165,8 @@ const getCurrentUserActiveAppointments = async () => {
     .get();
     for(const doc of hours.docs){
       var dateFormated = doc.get("dateFormated");
-      var date = moment(dateFormated,"DD-MM-YY HH:mm").format("DD.MM.YYYY");
-      var hour = moment(dateFormated,"DD-MM-YY HH:mm").format("HH:mm");
+      var date = moment(dateFormated,"DD-MM-YYYY HH:mm").format("DD.MM.YYYY");
+      var hour = moment(dateFormated,"DD-MM-YYYY HH:mm").format("HH:mm");
       appointments.push({appointmentDate:date, appointmentHour:hour})
       
     }
@@ -186,8 +186,8 @@ const getCurrentUserAppointmentsHistory = async () => {
     .get();
     for(const doc of hours.docs){
       var dateFormated = doc.get("dateFormated");
-      var date = moment(dateFormated,"DD-MM-YY HH:mm").format("DD.MM.YYYY");
-      var hour = moment(dateFormated,"DD-MM-YY HH:mm").format("HH:mm");
+      var date = moment(dateFormated,"DD-MM-YYYY HH:mm").format("DD.MM.YYYY");
+      var hour = moment(dateFormated,"DD-MM-YYYY HH:mm").format("HH:mm");
       appointments.push({appointmentDate:date, appointmentHour:hour})
       
     }
@@ -195,5 +195,14 @@ const getCurrentUserAppointmentsHistory = async () => {
   return appointments;
 }
 
+const deleteAppointment = async(date, time)=>{
+  var dateFormated=moment(date,'DD.MM.YYYY').format("DD-MM-YYYY");
+  await firestore
+    .collection('appointments')
+    .doc(dateFormated)
+    .collection('hours')
+    .doc(time)
+    .delete();
+}
 
-export { getAvailableHours, getUnifyDateTime,getCurrentUserAppointmentsHistory,getAppointmentAvailableDays, saveAppointment, getCurrentUserActiveAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };
+export { getAvailableHours, deleteAppointment, getUnifyDateTime, getCurrentUserAppointmentsHistory, getAppointmentAvailableDays, saveAppointment, getCurrentUserActiveAppointments, getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable };

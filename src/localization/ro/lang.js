@@ -36,5 +36,6 @@ export default {
     infoNrDaysAppointment: "Nr. de zile incepând de azi pentru care clientii se pot programa",
     infoTimeBetweenAppointments: "Nr. de minute intre doua programări",
     settings: "Setări",
-    save: "Salvează"
+    save: "Salvează",
+    appointmentDeleted:"Programarea a fost ștearsă"
   }

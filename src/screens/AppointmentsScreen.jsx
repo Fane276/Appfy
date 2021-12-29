@@ -10,7 +10,7 @@ import { faAngleLeft, faCalendarAlt, faPlus, faTrash } from '@fortawesome/free-s
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useFocusEffect } from '@react-navigation/native';
 import colors from '../assets/colors/colors'
-import { getCurrentUserActiveAppointments } from '../services/appointmentService'
+import { deleteAppointment, getCurrentUserActiveAppointments } from '../services/appointmentService'
 
 const AppointmentsScreen = ({ navigation, route }) => {
   const [appointmentsList, setAppointmentsList] = useState([]);
@@ -27,17 +27,31 @@ const AppointmentsScreen = ({ navigation, route }) => {
     freeH()
   }, []);
 
-
-useFocusEffect(
-  React.useCallback(()=>{
-    const freeH = async () => {
-      setBusy(true);
-      var appointments = await getCurrentUserActiveAppointments();
-      setAppointmentsList(appointments);
-      setBusy(false)
+  const onDeleteAppointment= async(date,time)=>{
+    setBusy(true);
+    try{
+      await deleteAppointment(date, time)
     }
-    freeH();
-},[]));
+    catch (error) {
+      Alert.alert(error.message)
+    }
+    alert(t("lang:appointmentDeleted"));
+    var appointments = await getCurrentUserActiveAppointments();
+    setAppointmentsList(appointments);
+    setBusy(false);
+  }
+
+  useFocusEffect(
+    React.useCallback(()=>{
+      const freeH = async () => {
+        setBusy(true);
+        var appointments = await getCurrentUserActiveAppointments();
+        setAppointmentsList(appointments);
+        setBusy(false)
+      }
+      freeH();
+  },[]));
+
 
   const { t } = useTranslation();
   // keyExtractor = (item, index) => index.toString();
@@ -79,7 +93,7 @@ useFocusEffect(
           <ListItem.Title style={{width:"100%",textAlign:'center'}}>{item.appointmentHour}</ListItem.Title>
           <ListItem.Subtitle style={{width:"100%",textAlign:'center'}}>{item.appointmentDate}</ListItem.Subtitle>
         </ListItem.Content>
-        <FontAwesomeIcon icon={faTrash} color={colors.deleteColor} />
+        <FontAwesomeIcon onPress={async ()=>{await onDeleteAppointment(item.appointmentDate, item.appointmentHour)}} icon={faTrash} color={colors.deleteColor} />
       </ListItem>
     // </TouchableOpacity>
   )

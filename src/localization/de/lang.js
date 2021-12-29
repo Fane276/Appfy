@@ -36,5 +36,6 @@ export default {
     infoNrDaysAppointment: "Anz. Tage beginnend von Heute in dem sich die Kunden programmieren konnen",
     infoTimeBetweenAppointments: "Anz. Minuten zwischen zwei Termine",
     settings: "Einstellungen",
-    save: "Speichern"
+    save: "Speichern",
+    appointmentDeleted: "Termin gelöscht"
   }
