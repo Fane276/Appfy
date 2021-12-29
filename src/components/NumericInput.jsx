@@ -4,9 +4,10 @@ import { Input } from 'react-native-elements';
 import colors  from '../assets/colors/colors';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const FormInput = ({name, placeholder, icon,label,  rules, keyboardType,control, secure, errorMessage })=>{
+const NumericInput = ({name, placeholder, iconLeft, iconRight,label,  rules,control,setValue, getValues, secure, errorMessage })=>{
   const {
     field,
     fieldState: { invalid, isTouched, isDirty, isValid }
@@ -17,11 +18,18 @@ const FormInput = ({name, placeholder, icon,label,  rules, keyboardType,control,
     rules
   })
 
-  useEffect(()=>{
-    if(keyboardType){
-      keyboardType = 'default'
-    }
-  },[])
+
+  //todo: vazut cum se pot face butoane sa fac increment
+  const increment = ()=>{
+    var currentValue = getValues(name);
+    setValue(name, currentValue+1);
+  }
+
+  const decrement = ()=>{
+    var currentValue = getValues(name);
+    setValue(name, currentValue-1);
+  }
+
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -36,7 +44,9 @@ const FormInput = ({name, placeholder, icon,label,  rules, keyboardType,control,
     value={field.value}
     onChangeText={field.onChange}
     label={label}
-    leftIcon={icon}
+    labelStyle={styles.label}
+    leftIcon={iconLeft}
+    rightIcon={iconRight}
     color={colors.lightBackground}
     onFocus={()=>onFocusChange(true)}
     onBlur={()=>onFocusChange(false)}
@@ -44,7 +54,7 @@ const FormInput = ({name, placeholder, icon,label,  rules, keyboardType,control,
     // inputContainerStyle={{borderBottomWidth: 0}}
     secureTextEntry={secure}
     errorStyle={{ color: 'red' }}
-    keyboardType={keyboardType}
+    keyboardType={'number-pad'}
     errorMessage={invalid?errorMessage:""}
   />
   )
@@ -52,16 +62,24 @@ const FormInput = ({name, placeholder, icon,label,  rules, keyboardType,control,
 
 const styles = StyleSheet.create({
   input:{
-    backgroundColor: 'transparent',
-    borderRadius: 20,
-    borderBottomWidth: 0
+    backgroundColor: colors.inputBackground,
+    borderRadius: 5,
+    borderBottomWidth: 2,
+    paddingHorizontal: 10,
+    color: colors.lightBackground
   },
   inputOnFocus:{
     backgroundColor: colors.inputFocusBackground,
-    borderRadius: 20,
-    borderBottomWidth: 0,
+    borderRadius: 5,
+    borderBottomWidth: 2,
     paddingHorizontal: 10,
+    color: colors.lightBackground
+  },
+  label:{
+    marginHorizontal: 5,
+    marginBottom: 10,
+    color: colors.labelColor
   }
 })
 
-export default FormInput;
+export default NumericInput;

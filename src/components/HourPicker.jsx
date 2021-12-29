@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { View, Text, Platform } from 'react-native'
+import { View, Text, Platform, StyleSheet } from 'react-native'
 import { useController } from 'react-hook-form';
 import { Input } from 'react-native-elements';
 import moment from 'moment';
+import colors from '../assets/colors/colors';
 
 const HourPicker = ({name, placeholder, icon, label,  rules,control, setValue, errorMessage }) => {
 
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const {
     field,
@@ -22,13 +23,21 @@ const HourPicker = ({name, placeholder, icon, label,  rules,control, setValue, e
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    var selectedDateFormated = moment(selectedDate).format("hh:mm");
+    var selectedDateFormated = moment(selectedDate).format("HH:mm");
     setValue(name, selectedDateFormated)
   };
 
   const display = () => {
     setShow(true);
   };
+
+  
+  const [isFocused, setIsFocused] = useState(false);
+
+  const onFocusChange = (val) =>{
+    setIsFocused(val);
+  }
+
   return (
     <View>
       <Input
@@ -38,7 +47,12 @@ const HourPicker = ({name, placeholder, icon, label,  rules,control, setValue, e
         value={field.value}
         onChangeText={field.onChange}
         label={label}
+        labelStyle={styles.label}
         leftIcon={icon}
+        onFocus={()=>onFocusChange(true)}
+        onBlur={()=>onFocusChange(false)}
+        inputContainerStyle={isFocused? styles.inputOnFocus : styles.input}
+        inputStyle= {{ color:colors.lightBackground}}
         errorStyle={{ color: 'red' }}
         onPressIn={display}
         errorMessage={invalid?errorMessage:""}
@@ -57,4 +71,25 @@ const HourPicker = ({name, placeholder, icon, label,  rules,control, setValue, e
   )
 }
 
+const styles = StyleSheet.create({
+  input:{
+    backgroundColor: colors.inputBackground,
+    borderRadius: 5,
+    borderBottomWidth: 2,
+    paddingHorizontal: 10,
+    color: colors.lightBackground
+  },
+  inputOnFocus:{
+    backgroundColor: colors.inputFocusBackground,
+    borderRadius: 5,
+    borderBottomWidth: 2,
+    paddingHorizontal: 10,
+    color: colors.lightBackground
+  },
+  label:{
+    marginHorizontal: 5,
+    marginBottom: 10,
+    color: colors.labelColor
+  }
+})
 export default HourPicker

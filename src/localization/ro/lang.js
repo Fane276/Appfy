@@ -23,9 +23,18 @@ export default {
     changeLanguage: 'Schimbă limba',
     makeAppointment: 'Programează',
     appointment: 'Programare',
+    appointments: 'Programări',
     location: 'Locație',
     home: 'Acasă',
     history: "Istoric",
     yourAppointments: "Programările tale",
-    youHaveNoAppointments: "Nu aveți nicio programare"
+    youHaveNoAppointments: "Nu aveți nicio programare",
+    nrDaysAppointment: "Nr. zile programări",
+    timeBetweenAppointments: "Timp intre programări",
+    startingHour: "Oră deschidere",
+    endHour: "Oră inchidere",
+    infoNrDaysAppointment: "Nr. de zile incepând de azi pentru care clientii se pot programa",
+    infoTimeBetweenAppointments: "Nr. de minute intre doua programări",
+    settings: "Setări",
+    save: "Salvează"
   }

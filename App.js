@@ -35,6 +35,7 @@ import SelectHourScreen from './src/screens/SelectHourScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import AppointmentsHistoryScreen from './src/screens/AppointmentsHistoryScreen';
 import AdminSettingsScreen from './src/screens/AdminSettingsScreen';
+import { getAppointmentsSettings } from './src/services/appointmentAdminService';
 
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
@@ -116,6 +117,13 @@ function Home() {
 }
 
 const App = () => {
+
+  useEffect(()=>{
+    const getUserPermission = async () =>{
+      await getAppointmentsSettings();
+    }
+    getUserPermission();
+  },[]);
 
   return (
     <NavigationContainer>

@@ -11,6 +11,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next';
 import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
 import { getDaysWithAtLeastOneAppointment, getDaysWithNoAppointmentsAvailable } from '../services/appointmentService'
+import { getAppointmentsSettings } from '../services/appointmentAdminService'
 
 const SelectDateScreen = ({ navigation, route }) => {
     const [markedDatesForCalendar, setMarkedDatesForCalendar] = useState(null);
@@ -21,6 +22,7 @@ const SelectDateScreen = ({ navigation, route }) => {
 
     useEffect(() => {
         const getDays = async ()=>{
+            await getAppointmentsSettings();
             const days = await getDaysWithAtLeastOneAppointment();
             const daysFull = await getDaysWithNoAppointmentsAvailable(AppointmentConstants.StartingHour, AppointmentConstants.TimeBetweenAppointments, AppointmentConstants.EndHour);
             var markedDatesObject = {}

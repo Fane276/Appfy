@@ -23,10 +23,18 @@ export default {
     changeLanguage: 'Change language',
     makeAppointment: 'Make appointment',
     appointment: 'Appointments',
+    appointments: 'Appointments',
     location: 'Location',
     home: 'Home',
     history: "History",
     yourAppointments: "Your appointments",
-    youHaveNoAppointments: "You have no appointment"
-    
+    youHaveNoAppointments: "You have no appointment",
+    nrDaysAppointment: "No. days appointment",
+    timeBetweenAppointments: "Time between appointments",
+    startingHour: "Starting hour",
+    endHour: "End hour",
+    infoNrDaysAppointment: "No. of days starting today for which customers can schedule",
+    infoTimeBetweenAppointments: "No. of minutes bettween two appointments",
+    settings: "Settings",
+    save: "Save"
   }

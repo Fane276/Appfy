@@ -10,6 +10,7 @@ import { ListItem } from 'react-native-elements'
 import { useState } from 'react'
 import { getAvailableHours, getUnifyDateTime, saveAppointment } from '../services/appointmentService'
 import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
+import { getAppointmentsSettings } from '../services/appointmentAdminService'
 
 
 const saveUserAppointment = async (userSelectedDate, userSelectedTime) => {
@@ -24,6 +25,7 @@ const SelectHourScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const freeH = async () => {
+      await getAppointmentsSettings();
       const freeHours = await getAvailableHours(AppointmentConstants.StartingHour, AppointmentConstants.TimeBetweenAppointments, AppointmentConstants.EndHour, dateSelected);
       setAvailableHours(freeHours)
     }

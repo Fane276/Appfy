@@ -23,9 +23,18 @@ export default {
     changeLanguage: 'Sprache ändern',
     makeAppointment: 'Termin machen',
     appointment: 'Termine',
+    appointments: 'Termine',
     location: 'Location',
     home: 'Heim',
     history: "Programmiergeschichte",
     yourAppointments: "Deine Termine",
-    youHaveNoAppointments: "Sie haben keine Termine"
+    youHaveNoAppointments: "Sie haben keine Termine",
+    nrDaysAppointment: "Anz. Tage Termine",
+    timeBetweenAppointments: "Zeit zwischen Termine",
+    startingHour: "Oră deschidere",
+    endHour: "Oră inchidere",
+    infoNrDaysAppointment: "Anz. Tage beginnend von Heute in dem sich die Kunden programmieren konnen",
+    infoTimeBetweenAppointments: "Anz. Minuten zwischen zwei Termine",
+    settings: "Einstellungen",
+    save: "Speichern"
   }
