@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
+import { Image } from 'react-native';
 import { View } from 'react-native'
 import GradientBackground from '../components/GradientBackground';
-import { Image } from 'react-native-elements';
 import { auth } from '../firebase/firebase';
 
 function SplashScreen({ navigation }) {

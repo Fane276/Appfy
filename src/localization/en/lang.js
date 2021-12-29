@@ -37,5 +37,6 @@ export default {
     infoTimeBetweenAppointments: "No. of minutes bettween two appointments",
     settings: "Settings",
     save: "Save",
-    appointmentDeleted:"Appointment deleted"
+    appointmentDeleted:"Appointment deleted",
+    anErrorOccurred:"An error occurred",
   }

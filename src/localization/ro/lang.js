@@ -37,5 +37,6 @@ export default {
     infoTimeBetweenAppointments: "Nr. de minute intre doua programări",
     settings: "Setări",
     save: "Salvează",
-    appointmentDeleted:"Programarea a fost ștearsă"
+    appointmentDeleted:"Programarea a fost ștearsă",
+    anErrorOccurred:"A intervenit o eroare",
   }

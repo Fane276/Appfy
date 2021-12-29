@@ -37,7 +37,7 @@ const RegisterScreen = ({ navigation, route }) => {
       }
     }
     catch (error) {
-      Alert.alert(error.message)
+      Alert.alert(t("lang:anErrorOccurred"))
     }
   };
 

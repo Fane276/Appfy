@@ -37,5 +37,6 @@ export default {
     infoTimeBetweenAppointments: "Anz. Minuten zwischen zwei Termine",
     settings: "Einstellungen",
     save: "Speichern",
-    appointmentDeleted: "Termin gelöscht"
+    appointmentDeleted: "Termin gelöscht",
+    anErrorOccurred:"Ein Fehler ist aufgetreten",
   }

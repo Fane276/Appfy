@@ -90,7 +90,7 @@ const ProfileScreen = ({ navigation, route }) => {
                             size = 'xlarge'
                             rounded
                             title={userData==null || userData.email=="" ? "P":userData.emailAddress[0]}
-                            source={require("../assets/img/appointments.png")}
+                            source={require("../assets/img/profile_icon3.png")}
                             containerStyle = {styles.avatar}
                             />
                 </View>
