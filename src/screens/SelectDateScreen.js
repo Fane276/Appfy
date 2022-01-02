@@ -44,7 +44,7 @@ const SelectDateScreen = ({ navigation, route }) => {
                         <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
                     </TouchableOpacity>
                 }
-                centerComponent={{ text: t('lang:SelectDateTitle'), style: { color: '#fff' } }}
+                centerComponent={{ text: t('lang:selectDateTitle'), style: { color: '#fff' } }}
                 backgroundColor={colors.darkBackground}
                 containerStyle={{ borderWidth: 0 }}
             />

@@ -10,8 +10,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#28313b"
     },
+    "assetBundlePatterns": [
+      "./src/assets/img/*"
+    ],
     "android": {
       "package": "com.isoftwarebox.appfy"
-    }
+    },
+    "description": ""
   }
 }
