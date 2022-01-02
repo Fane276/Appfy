@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView, Alert } from 'react-native'
-import { Image } from 'react-native-elements';
+import { View, Text, StyleSheet, SafeAreaView, Alert, Image } from 'react-native'
 import { useTranslation } from 'react-i18next';
 
 import colors from '../assets/colors/colors';
@@ -102,12 +101,12 @@ function LoginScreen({ navigation, route }) {
             </View>
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
             {
-                languageList.map((item, i) => (
+                languageList.map(item => (
                     <View>
-                        <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
+                        <TouchableOpacity style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
                             <Text style={styles.languageButtonText}>{item.name}</Text>
                         </TouchableOpacity>
-                        <View style={i!=languageList.length - 1?{height:0.5, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
+                        <View style={item.code=="de"?{height:0.5, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
                     </View>
                 ))
             }
@@ -157,7 +156,7 @@ function LoginScreen({ navigation, route }) {
               </Text>
             </TouchableOpacity>
 
-            <View style={styles.registerWraper}>
+            {/* <View style={styles.registerWraper}>
               <TouchableOpacity
                 style={styles.socialButton}
                 // onPress={onGoogleButtonPress}
@@ -170,7 +169,7 @@ function LoginScreen({ navigation, route }) {
               <TouchableOpacity style={styles.socialButton}>
                 <FontAwesomeIcon icon={faApple} color={"#4267B2"} />
               </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={styles.registerWraper}>
               <Text style={styles.registerMessage}>
                 {t('lang:noAccount')}
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   registerMessage: {
-    color: colors.textDark,
+    color: colors.labelColor,
     textAlign: 'center',
     flexDirection: 'row',
     alignItems: 'center',

@@ -4,6 +4,12 @@
   "expo": {
     "name": "Appfy",
     "slug": "appfy",
+    "icon": "./src/assets/img/icon_appfy.png",
+    "splash": {
+      "image": "./src/assets/img/AppfyLogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#28313b"
+    },
     "android": {
       "package": "com.isoftwarebox.appfy"
     }

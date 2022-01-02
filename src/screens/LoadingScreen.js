@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import GradientBackground from '../components/GradientBackground';
-import { Image } from 'react-native-elements';
 import { auth } from '../firebase/firebase';
 
 import { useTranslation } from 'react-i18next';
@@ -37,7 +36,7 @@ function LoadingScreen({ navigation, route }) {
 
     }
     catch (e){
-      alert(JSON.stringify(e));
+      alert(e.message);
       // alert(t("lang:invalidLogin"));
       navigation.goBack();
     }

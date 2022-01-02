@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   registerMessage: {
-    color: colors.textDark,
+    color: colors.labelColor,
     textAlign: 'center',
     flexDirection: 'row',
     alignItems: 'center',

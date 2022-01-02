@@ -110,12 +110,12 @@ const ProfileScreen = ({ navigation, route }) => {
             <Text style={styles.email}>{userData==null ? "Profile":userData.emailAddress}</Text>
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlayStyle}>
             {
-                languageList.map((item, i) => (
+                languageList.map(item => (
                     <View>
-                        <TouchableOpacity key={i} style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
+                        <TouchableOpacity style={styles.languageButton} onPress={()=>{i18n.changeLanguage(item.code); toggleOverlay()}} >
                             <Text style={styles.languageButtonText}>{item.name}</Text>
                         </TouchableOpacity>
-                        <View style={i<languageList.length-1?{height:0.6, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
+                        <View style={item.code=="de"?{height:0.5, backgroundColor: colors.textDisabled}: {display:'none'}}></View>
                     </View>
                 ))
             }

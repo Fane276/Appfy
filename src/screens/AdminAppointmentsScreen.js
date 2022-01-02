@@ -79,7 +79,7 @@ const AdminAppointmentsScreen = ({ navigation, route }) => {
           <ListItem.Title style={{width:"100%",textAlign:'center'}}>{item.userName}</ListItem.Title>
           <ListItem.Subtitle style={{width:"100%",textAlign:'center'}}>{item.appointmentDate} {item.appointmentHour}</ListItem.Subtitle>
         </ListItem.Content>
-        <FontAwesomeIcon icon={faPencilAlt} color={colors.primary} />
+        {/* <FontAwesomeIcon icon={faPencilAlt} color={colors.primary} /> */}
       </ListItem>
     // </TouchableOpacity>
   )

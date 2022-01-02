@@ -12,6 +12,7 @@ import colors from '../assets/colors/colors';
 import GradientBackground from '../components/GradientBackground';
 import {auth} from '../firebase/firebase';
 import { getUser }from '../firebase/utils/logInWithEmailAndPassword'
+import logo from '../assets/img/AppfyLogo.png'
 
 const getUserData= async ()=>{
     try{
@@ -46,7 +47,7 @@ const MainScreen = ({ navigation, route }) => {
       <GradientBackground >
         <View style={styles.logo}>
           <Image
-            source={require("../assets/img/AppfyLogo.png")}
+            source={logo}
             style={{ width: 200, height: 200 }}
           />
         </View>
