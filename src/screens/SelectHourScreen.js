@@ -11,12 +11,44 @@ import { useState } from 'react'
 import { getAvailableHours, getUnifyDateTime, saveAppointment } from '../services/appointmentService'
 import AppointmentConstants from '../assets/AppConstants/AppointmentConstants'
 import { getAppointmentsSettings } from '../services/appointmentAdminService'
-
+import * as Notifications from 'expo-notifications'
+import moment from 'moment'
 
 const saveUserAppointment = async (userSelectedDate, userSelectedTime) => {
+  scheduleNotif(userSelectedDate, userSelectedTime).catch(error => {
+    console.warn(error);
+  });
   var unifiedMoment = getUnifyDateTime(userSelectedDate, userSelectedTime)
   var result = await saveAppointment(unifiedMoment);
   return !result.hasError;
+}
+
+const scheduleNotif = async (date, time) => {
+  var triggerDate = moment(date,'YYYY-MM-DD').startOf('day').hour(14).subtract(24, 'hours'); //triggerdate bun - o zi inainte de programare
+  // var triggerDate = moment().add(5, 'seconds'); //test date
+  var triggerTime = triggerDate.diff(moment()) / 1000;
+
+  //set handler
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+  
+  //schedule notification  
+  Notifications.scheduleNotificationAsync({
+    content: {
+      //title: t('lang:NotificationTitle'),
+      //body: t('lang:NotificationBody'),
+      title: "Your appointment is important!",
+      body: "Don't miss your appointment tomorrow at " + time,
+    },
+    trigger: {
+      seconds: triggerTime
+    }
+  });
 }
 
 const SelectHourScreen = ({ navigation, route }) => {
@@ -39,7 +71,7 @@ const SelectHourScreen = ({ navigation, route }) => {
     <TouchableOpacity onPress={async () => {
       var isSaved = await saveUserAppointment(dateSelected.dateString, item)
       if (isSaved)
-        alert("Appointment done!");
+        alert(t('lang:AppointmentDone'));
         navigation.navigate("Home");
     }
     }>

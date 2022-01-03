@@ -39,5 +39,8 @@ export default {
     save: "Speichern",
     appointmentDeleted: "Termin gelöscht",
     anErrorOccurred:"Ein Fehler ist aufgetreten",
-    selectDateTitle:"Wähle das Datum"
+    selectDateTitle:"Wähle das Datum",
+    NotificationTitle:"Termine Leben Zahlen!",
+    NotificationBody:"Vergessen Sie nicht uber ihren Termin, Sie haben doch auf Morgen so gewartet..",
+    AppointmentDone:"Termin bestatigt!"
   }

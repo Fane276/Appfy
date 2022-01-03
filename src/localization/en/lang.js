@@ -39,5 +39,8 @@ export default {
     save: "Save",
     appointmentDeleted:"Appointment deleted",
     anErrorOccurred:"An error occurred",
-    selectDateTitle:"Select date"
+    selectDateTitle:"Select date",
+    NotificationTitle:"Appointment lives matter!",
+    NotificationBody:"You wouldn't want to forget about your appointment, you've been waiting impatiently for tomorrow..",
+    AppointmentDone:"Appointment done!"
   }

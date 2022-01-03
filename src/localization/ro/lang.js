@@ -39,5 +39,8 @@ export default {
     save: "Salvează",
     appointmentDeleted:"Programarea a fost ștearsă",
     anErrorOccurred:"A intervenit o eroare",
-    selectDateTitle:"Selectează dată"
+    selectDateTitle:"Selectează dată",
+    NotificationTitle:"Viețile programarilor contează!",
+    NotificationBody:"Nu uitati de programarea dumneavoastra, ati asteptat cu nerabdare ziua de maine..",
+    AppointmentDone:"Programare confirmata!"
   }

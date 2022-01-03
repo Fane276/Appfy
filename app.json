@@ -16,6 +16,19 @@
     "android": {
       "package": "com.isoftwarebox.appfy"
     },
-    "description": ""
+    "description": "",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/img/icon_appfy.png",
+          "color": "#ffffff",
+          "sounds": [
+            "./local/assets/notification-sound.wav",
+            "./local/assets/notification-sound-other.wav"
+          ]
+        }
+      ]
+    ]
   }
 }
