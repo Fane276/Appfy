@@ -54,7 +54,7 @@ useFocusEffect(
     else{
       if(appointmentsList.length > 0){
         return (
-          <FlatList
+          <FlatList style={{marginBottom: 7}}
             data={appointmentsList}
             renderItem={renderItem}
           />

@@ -24,8 +24,8 @@ const saveUserAppointment = async (userSelectedDate, userSelectedTime) => {
 }
 
 const scheduleNotif = async (date, time) => {
-  var triggerDate = moment(date,'YYYY-MM-DD').startOf('day').hour(14).subtract(24, 'hours'); //triggerdate bun - o zi inainte de programare
-  // var triggerDate = moment().add(5, 'seconds'); //test date
+  // var triggerDate = moment(date,'YYYY-MM-DD').startOf('day').hour(14).subtract(24, 'hours'); //triggerdate bun - o zi inainte de programare
+  var triggerDate = moment().add(5, 'seconds'); //test date
   var triggerTime = triggerDate.diff(moment()) / 1000;
 
   //set handler
@@ -95,11 +95,11 @@ const SelectHourScreen = ({ navigation, route }) => {
             <FontAwesomeIcon icon={faAngleLeft} color={colors.lightBackground} />
           </TouchableOpacity>
         }
-        centerComponent={{ text: t('lang:SelectDateTitle'), style: { color: '#fff' } }}
+        centerComponent={{ text: t('lang:selectDateTitle'), style: { color: '#fff' } }}
         backgroundColor={colors.darkBackground}
         containerStyle={{ borderWidth: 0 }}
       />
-      <FlatList
+      <FlatList  style={{marginBottom: 7}}
         data={availableHours}
         renderItem={renderItem}
       />
